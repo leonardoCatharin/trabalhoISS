@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="well" style="margin-top: 50px">
+
+            <label for="login">Login</label>
+            <input id="login" type="text" ng-model="login" class="form-control"/>
+            <label for="senha">Senha</label>
+            <input id="senha" type="password" ng-model="senha" class="form-control"/>
+
+            <div class="col-md-12" style="margin-top: 15px">
+                <button type="button" class="btn btn-primary pull-right" ui-sref="produto.lista"
+                        ng-disabled="!login || !senha">Login</button>
+            </div>
+                <span class="clearfix"></span>
+        </div>
+    </div>
+</div>

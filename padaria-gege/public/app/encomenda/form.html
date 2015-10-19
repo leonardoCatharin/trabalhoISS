@@ -1,0 +1,73 @@
+<div class="col-md-8 col-md-offset-2">
+    <form name="forms">
+        <div class="row">
+            <div class="col-md-12">
+                <label for="nome">Cliente <strong class="text-danger" ng-show="!entity.cliente"> *</strong></label>
+                <input id="nome" type="text" typeahead="pro as pro.name for pro in clientes | filter:$viewValue | limitTo:8" ng-model="entity.cliente" class="form-control" required/>
+            </div>
+
+            <div class="col-md-12">
+                <label for="endereco">Endereço de entrega <strong class="text-danger" ng-show="!entity.endereco">
+                    *</strong></label>
+                <input id="endereco" type="text" ng-model="entity.endereco" class="form-control" required/>
+            </div>
+
+            <div class="col-md-12">
+                <label for="fixo">Data de entrega <strong class="text-danger" ng-show="!entity.data"> *</strong></label>
+                <input id="fixo" type="date" ng-model="entity.data" class="form-control" required/>
+            </div>
+
+            <div class="col-md-12">
+                <label for="horario">Horario de entrega <strong class="text-danger" ng-show="!entity.horario">
+                    *</strong></label>
+                <input ng-model="entity.horario" name="horario" type="time" id="horario" class="form-control" required/>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 15px">
+            <div class="well">
+                <div class="col-md-6">
+                    <label for="produto">Produto</label>
+                    <input id="produto" name="produto" type="text" ng-model="produto.valor"
+                           typeahead="pro as pro.name for pro in produtos | filter:$viewValue" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label for="quantidade">Quantidade</label>
+                    <input id="quantidade" name="quantidade" type="number" ng-model="produto.quantidade" class="form-control">
+                </div>
+                <div class="col-md-12" style="margin-top: 15px">
+                    <button id="add" name="add" type="button" class="btn btn-info" ng-click="add(produto)" ng-disabled="!produto.valor.name || !produto.quantidade">
+                        Adicionar <span class="fa fa-plus"></span>
+                    </button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <thead>
+                <th>Nome</th>
+                <th>Quantidade</th>
+                <th></th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="data in valores">
+                    <td>{{data.valor.name}}</td>
+                    <td>
+                        {{data.quantidade}}
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" type="button" ng-click="remover($index)"> <span class="fa fa-remove"></span></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-12" style="margin-top: 15px">
+            <button type="button" class="btn btn-primary pull-right" ui-sref="encomenda.lista" ng-disabled="forms.$invalid || valores.length <=0 || !entity.cliente.name">Salvar</button>
+        </div>
+        <span class="clearfix"></span>
+    </form>
+</div>

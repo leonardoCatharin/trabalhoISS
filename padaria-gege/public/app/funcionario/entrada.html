@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-md-4 col-md-offset-4" style="margin-top: 125px">
+        <div class="col-md-12">
+            <label>Funcionario</label>
+            <input type="text" ng-model="login" class="form-control"/>
+        </div>
+        <div class="col-md-12">
+            <label>Senha</label>
+            <input type="password" ng-model="senha" class="form-control"/>
+        </div>
+        <div class="col-md-12" style="margin-top: 15px">
+            <button class="btn btn-primary" ng-click="entrada()" ng-disabled="!login || !senha">Salvar <span class="fa fa-check"></span></button>
+        </div>
+    </div>
+</div>

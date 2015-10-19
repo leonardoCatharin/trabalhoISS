@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="col-md-12">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Home</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown" dropdown>
+                            <a class="dropdown-toggle" dropdown-toggle role="button">
+                                Ordem de produção<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a ui-sref="ordemproducao.lista">Visualizar ordens de produção</a></li>
+                                <li><a ui-sref="ordemproducao.novo">Criar ordens de produção</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" dropdown>
+                            <a href="#" class="dropdown-toggle" dropdown-toggle data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Encomenda<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a ui-sref="encomenda.novo">Realizar encomenda</a></li>
+                                <li><a ui-sref="encomenda.lista">Visualizar encomendas</a></li>
+                                <li><a ui-sref="entrega.lista">Visualizar entregas</a></li>
+                                <li><a ui-sref="cliente.novo">Cadastrar cliente</a></li>
+                                <li><a ui-sref="cliente.lista">Listar cliente</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" dropdown>
+                            <a href="#" class="dropdown-toggle" dropdown-toggle data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pedido de compra<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a ui-sref="pedidocompra.novo">Criar pedido</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" dropdown>
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" dropdown-toggle>Produto<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a ui-sref="produto.lista">Exibir produtos</a></li>
+                                <li><a ui-sref="produto.novo">Cadastar produto</a></li>
+                                <li><a ui-sref="produto.emfalta">Produtos em falta</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" dropdown>
+                            <a class="dropdown-toggle" dropdown-toggle data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Funcionário<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a ui-sref="funcionario.novo">Cadastar funcionário</a></li>
+                                <li><a ui-sref="funcionario.lista">Listar Funcionário</a></li>
+                                <li><a ui-sref="funcionario.entrada">Atualizar frequência</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" dropdown>
+                            <a class="dropdown-toggle" dropdown-toggle data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Financeiro<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a ui-sref="venda.lista">Fechar caixa</a></li>
+                                <li><a ui-sref="relatorio.lista">Relatório</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" dropdown>
+                            <a class="dropdown-toggle" dropdown-toggle data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Venda<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a ui-sref="venda.lista">Iniciar venda</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a ui-sref="login">Logoff</a></li>
+
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+        <div ui-view></div>
+    </div>
+</div>

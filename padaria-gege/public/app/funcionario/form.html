@@ -1,0 +1,35 @@
+<div class="col-md-8 col-md-offset-2">
+    <form name="forms">
+        <div class="col-md-12">
+            <label for="nome">Nome <strong class="text-danger" ng-show="!entity.nome"> *</strong></label>
+            <input id="nome" type="text" ng-model="entity.nome" class="form-control" required/>
+        </div>
+
+        <div class="col-md-12">
+            <label for="endereco">Endereço <strong class="text-danger" ng-show="!entity.endereco"> *</strong></label>
+            <input id="endereco" type="text" ng-model="entity.endereco" class="form-control" required/>
+        </div>
+
+        <div class="col-md-12">
+            <label for="fixo">Telefone Fixo <strong class="text-danger" ng-show="!entity.fixo"> *</strong></label>
+            <input id="fixo" type="text" name="fixo" ng-model="entity.fixo" ui-br-phone-number required class="form-control"/>
+            <small class="text-danger" ng-show="forms.fixo.$error.brPhoneNumber">Telefone inválido</small>
+        </div>
+
+        <div class="col-md-12">
+            <label for="celular">Telefone Celular</label>
+            <input ng-model="entity.celular" name="celular" id="celular" class="form-control" ui-br-phone-number/>
+            <small class="text-danger" ng-show="forms.celular.$error.brPhoneNumber">Telefone inválido</small>
+        </div>
+
+        <div class="col-md-12">
+            <label for="funcao">Função <strong class="text-danger" ng-show="!entity.funcao"> *</strong></label>
+            <input ng-model="entity.funcao" name="funcao" id="funcao" class="form-control" required/>
+        </div>
+
+        <div class="col-md-12" style="margin-top: 15px">
+            <button type="button" class="btn btn-primary pull-right" ui-sref="funcionario.lista" ng-disabled="forms.$invalid">Salvar</button>
+        </div>
+        <span class="clearfix"></span>
+    </form>
+</div>

@@ -1,0 +1,31 @@
+
+<div class="col-md-8 col-md-offset-2">
+    <div class="col-md-12">
+        <label>Cliente: Maria de Souza</label>
+    </div>
+
+    <div class="col-md-12">
+        <label>Endereço: Rua Brasil, 123</label>
+    </div>
+
+    <div class="col-md-12">
+        <label>Horario de Entrega: 12:30</label>
+    </div>
+    <div class="col-md-12">
+        <label>Produtos</label>
+        <table class="table">
+            <thead>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="data in valores">
+                <td>nome</td>
+                <td>{{data.nome}}</td>
+                <td>{{data.quantidade}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <span class="clearfix"></span>
+</div>

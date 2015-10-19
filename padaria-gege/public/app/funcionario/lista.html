@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <a class="btn btn-primary" ui-sref="funcionario.novo">Adicionar Funcionário <span class="fa fa-plus"></span></a>
+    </div>
+    <div class="col-md-10 col-md-offset-1">
+        <table class="table table-hover">
+            <thead>
+                <th>Nome</th>
+                <th>Endereço</th>
+                <th>Telefone Fixo</th>
+                <th>Telefone Celular</th>
+                <th>Função</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="data in funcionarios">
+                    <td>{{data.name}}</td>
+                    <td>{{data.endereco}}</td>
+                    <td>{{data.fixo}}</td>
+                    <td>{{data.cel}}</td>
+                    <td>{{data.funcao}}</td>
+                    <td>
+                        <button class="btn btn-danger" ng-click="remover($index)"><span class="fa fa-remove"></span></button>
+                        <button class="btn btn-info" ng-click="alterar($index)">Alterar <span class="fa fa-edit"></span></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

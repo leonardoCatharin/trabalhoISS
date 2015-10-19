@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <!-- Select Basic -->
+        <div class="well">
+        <div class="col-md-12">
+            <label for="selectbasic">Tipo</label>
+                <select id="selectbasic" ng-model="select" name="selectbasic" class="form-control">
+                    <option selected>Geral</option>
+                    <option>Despesa</option>
+                    <option>Lucro</option>
+                    <option>Folha Salarial</option>
+                </select>
+        </div>
+
+        <!-- Text input-->
+        <div class="col-md-12">
+            <label for="dataInicio">Data de início</label>
+            <input id="dataInicio" name="dataInicio" type="date" ng-model="inicio" placeholder="data de início" class="form-control">
+
+        </div>
+
+        <!-- Text input-->
+        <div class="col-md-12" ng-if="select != 'Folha Salarial'">
+            <label for="textinput">Data de fim</label>
+            <input id="textinput" name="textinput" type="date" ng-model="$parent.fim" placeholder="data de fim" class="form-control">
+        </div>
+        <div class="col-md-12" style="margin-top: 15px">
+            <button class="btn btn-info" ng-disabled="!isAble()">Buscar <span class="fa fa-search"></span></button>
+        </div>
+            <div class="clearfix"></div>
+        </div>
+
+
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                <th>Quantidade</th>
+                <th>Prazo</th>
+                <th>Valor</th>
+                <th></th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="data in valores">
+                    <td>{{data.quantidade}}</td>
+                    <td>{{data.prazo}}</td>
+                    <td><span>
+                        {{data.valor}}
+                    </span>
+                        <input type="text"/>
+                    </td>
+                    <td>
+                        <button class="bt btn-danger" ng-click="remover($index)">X</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

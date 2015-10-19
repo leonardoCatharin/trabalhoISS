@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <!-- Text input-->
+        <div class="col-md-12">
+            <label>Data</label>
+            <div class="input-group">
+                <input id="data" name="date" ng-model="data" type="date" placeholder="data" class="form-control">
+                <span class="input-group-btn">
+                        <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>
+                </span>
+            </div>
+        </div>
+
+        <!-- Button -->
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <th>Endereço</th>
+                    <th>Horario</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="data in valores">
+                    <td>nome</td>
+                    <td>{{data.endereco}}</td>
+                    <td>{{data.horario}}</td>
+                    <td>
+                        <button class="btn btn-danger" ng-click="remover($index)">Editar</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

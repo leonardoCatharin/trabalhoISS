@@ -1,0 +1,29 @@
+<div class="row">
+
+    <div class="col-md-10 col-md-offset-1">
+        <a type="button"  ui-sref="cliente.novo" class="btn btn-primary">Adicionar cliente <span class="fa fa-plus"></span></a>
+        <table class="table table-hover">
+            <thead>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Telefone Fixo</th>
+                <th>Telefone Celular</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="data in clientes">
+                    <td>{{data.name}}</td>
+                    <td>{{data.idade}}</td>
+                    <td>{{data.fixo}}</td>
+                    <td>{{data.cel}}</td>
+                    <td>
+                      <div class="pull-right">
+                        <button class="btn btn-sm btn-danger" ng-click="remover($index)"><span class="fa fa-remove"></span></button>
+                        <button class="btn btn-sm btn-info" ng-click="alterar($index)">Alterar <span class="fa fa-edit"></span></button>
+                      </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

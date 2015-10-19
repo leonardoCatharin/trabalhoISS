@@ -1,0 +1,65 @@
+<div class="col-md-12">
+  <div class="col-md-4 col-md-offset-4" style="margin-top: 5%;">
+    <button class="btn btn-block btn-info" ng-click="open()"> Adicionar venda</button>
+  </div>
+  <div class="col-md-4 col-md-offset-4">
+    <table class="table">
+      <thead>
+        <td><b>Nome do cliente</b></td>
+        <td><b>Preço da venda</b></td>
+        <td><b>Quantidade de itens</b></td>
+      </thead>
+      <tbody>
+        <tr ng-repeat="v in sales">
+          <td>{{v.cliente}}</td>
+          <td>{{getPrecos(v) | currency:"R$":2}}</td>
+          <td>{{v.vendas.length == 1 ? v.vendas.length + ' item' : v.vendas.length + ' itens'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-4 col-md-offset-4">
+    <button class="btn btn-primary pull-right">Fechar caixa</button>
+  </div>
+</div>
+<script type="text/ng-template" id="modaltemplate.html">
+<div class="modal-header">
+  <h3 class="modal-title">Cadastrar venda:</h3>
+</div>
+<div class="modal-body">
+  <div>
+    <div class="col-md-12">
+      <label> <b>Clientes</b></label>
+      <input type="text" typeahead="item.name for item in clientes | filter:$viewValue" ng-model="cliente" class="form-control"/>
+    </div>
+    <div class="col-md-8">
+      <label for="produto"> <b>Produto</b></label>
+      <select id="produto" ng-options="item.name for item in products" ng-model="sale.product" class="form-control"></select>
+    </div>
+    <div class="col-md-4">
+      <label><b>Quantidade</b></label>
+      <div class="input-group">
+        <input type="number" ng-model="sale.number" class="form-control">
+        <span class="input-group-btn">
+          <button class="btn btn-info" type="button" ng-click="add(sale)"><i class="glyphicon glyphicon-plus"></i></button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="col-md-12">
+    <label><b>Produtos Adicionados</b></label>
+    <ul>
+      <li ng-repeat="prd in addedProducts">
+        {{prd.product.name}} - {{prd.number == 1 ? prd.number + ' unidade' : prd.number + ' unidades'}}
+      </li>
+    </ul>
+  </div>
+
+  <div class="clearfix"></div>
+</div>
+<div class="modal-footer">
+<button class="btn btn-warning" type="button" ng-click="close(false)">Cancelar compra</button>
+  <button class="btn btn-primary" type="button" ng-click="close(true)">Salvar compra</button>
+</div>
+</script>

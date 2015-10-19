@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <a class="btn btn-primary" ui-sref="encomenda.novo">Novo <span class="fa fa-plus"></span></a>
+    </div>
+    <div class="col-md-8 col-md-offset-2">
+        <table class="table table-hover">
+            <thead>
+                <th>Cliente</th>
+                <th>Data de Entrega</th>
+                <th>Horário de entrega</th>
+                <th>Endereço</th>
+                <th>Quantidade de Itens</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="data in valores">
+                    <td>{{data.cliente}}</td>
+                    <td>{{data.data}}</td>
+                    <td>{{data.horario}}</td>
+                    <td>{{data.endereco}}</td>
+                    <td>{{data.quantidade}}</td>
+                    <td>
+                        <button class="btn btn-info" ng-click="alterar($index)">Alterar <span class="fa fa-edit"></span></button>
+                        <button class="btn btn-danger" ng-click="remover($index)"><span class="fa fa-remove"></span></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <a class="btn btn-primary" ui-sref="ordemproducao.novo">Novo +</a>
+    </div>
+    <div class="col-md-8 col-md-offset-2">
+        <table class="table table-">
+            <thead>
+                <th>Quantidade</th>
+                <th>Prazo</th>
+                <th>Valor</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="data in valores">
+                    <td>{{data.quantidade}}</td>
+                    <td>{{data.prazo}}</td>
+                    <td>
+                        {{data.valor|currency:'R$'}}
+                    </td>
+                    <td>
+                        <button class="bt btn-danger" ng-click="remover($index)">X</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

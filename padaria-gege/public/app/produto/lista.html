@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <a class="btn btn-primary" ui-sref="produto.novo">Novo <span class="fa fa-plus"></span></a>
+        <button class="btn btn-warning" ui-sref="produto.emfalta" ng-if="!in">Produtos em Falta <span class="fa fa-level-down"></span></button>
+    </div>
+    <div class="col-md-8 col-md-offset-2">
+        <table class="table table-">
+            <thead>
+                <th>Nome</th>
+                <th>Tipo</th>
+                <th>Valor</th>
+                <th>Quantidade Minima</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="data in valores">
+                    <td>{{data.nome}}</td>
+                    <td>{{data.tipo}}</td>
+                    <td>{{data.valor|currency:'R$'}}</td>
+                    <td>{{data.qntdMin}}</td>
+                    <td>
+                        <button class="btn btn-danger" ng-click="remover($index)"><span class="fa fa-remove"></span></button>
+                        <button class="btn btn-info" ng-click="alterar($index)">Alterar Produto <span class="fa fa-edit"></span></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
