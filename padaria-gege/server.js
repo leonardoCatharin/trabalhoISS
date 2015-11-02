@@ -63,6 +63,7 @@ console.log(`The server is running on port: ${port}`);
   Rotas chamam os controllers que chamam os services que usa o modelo.
  */
 require(__dirname + '/app/produto/route/route')(app);
+require(__dirname + '/app/usuario/route/route')(app);
 
 /*
   Neste trecho de código estamos fazendo a conexão com o banco de dados.

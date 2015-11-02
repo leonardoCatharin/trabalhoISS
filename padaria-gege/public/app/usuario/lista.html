@@ -1,0 +1,25 @@
+<div class="row">
+
+    <div class="col-md-10 col-md-offset-1">
+        <a type="button"  ui-sref="usuario.novo" class="btn btn-primary">Adicionar usuário <span class="fa fa-plus"></span></a>
+        <table class="table table-hover">
+            <thead>
+                <th>Login</th>
+                <th>Setor do usuário</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="data in usuarios">
+                    <td>{{data.login}}</td>
+                    <td>{{data.tipo}}</td>
+                    <td>
+                      <div class="pull-right">
+                        <button class="btn btn-sm btn-danger" ng-click="remover(data._id)"><span class="fa fa-remove"></span></button>
+                        <button class="btn btn-sm btn-info" ng-click="alterar(data._id)">Alterar <span class="fa fa-edit"></span></button>
+                      </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -10,6 +10,8 @@
   require('./app/relatorio/module');
   require('./app/entrega/module');
   require('./app/encomenda/module');
+  require('./app/usuario/module');
+
 
 angular.module('myApp', [
     'ui.router'
@@ -24,6 +26,7 @@ angular.module('myApp', [
     , 'app.relatorio'
     , 'app.entrega'
     , 'app.encomenda'
+    , 'app.usuario'
 
 ]).config(['$stateProvider', '$urlRouterProvider',($stateProvider, $urlRouterProvider) => {
     $urlRouterProvider.otherwise("/produto");
@@ -62,6 +65,10 @@ angular.module('myApp', [
         })
         .state('encomenda', {
             url: "/encomenda"
+            ,templateUrl:'base.html'
+        })
+        .state('usuario', {
+            url: "/usuario"
             ,templateUrl:'base.html'
         });
 

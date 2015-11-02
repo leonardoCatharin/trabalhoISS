@@ -1,0 +1,27 @@
+<div class="col-md-8 col-md-offset-2">
+<form name="forms">
+    <div class="col-md-12">
+        <label for="login">Login <strong class="text-danger" ng-show="!entity.login">*</strong></label>
+        <input id="login" type="text" ng-model="entity.login" class="form-control" required/>
+    </div>
+
+    <div class="col-md-12">
+        <label for="senha">Senha <strong class="text-danger" ng-show="!entity.senha">*</strong></label>
+        <input id="senha" type="password" ng-model="entity.senha" class="form-control" required/>
+    </div>
+
+    <div class="col-md-12">
+        <label for="confsenha">Confirmar Senha <strong class="text-danger" ng-show="confsenha != entity.senha">A senha não confere</strong></label>
+        <input id="confsenha" type="password" ng-model="confsenha" class="form-control" required/>
+    </div>
+
+    <div class="col-md-12">
+        <label for="setor">Setor do Usuário</label>
+        <select ng-model="entity.tipo" name="setor" id="setor" class="form-control" required ng-options="tipo for tipo in tipos track by tipo"></select>
+    </div>
+    <div class="col-md-12" style="margin-top: 15px">
+        <button type="button" ng-disabled="forms.$invalid || confsenha != entity.senha" class="btn btn-primary pull-right" ng-click="save(entity)">Salvar <span class="fa fa-check"></span></button>
+    </div>
+    <span class="clearfix"></span>
+</form>
+</div>
