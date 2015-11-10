@@ -14,7 +14,9 @@
     "express": "^4.13.3",
     "method-override": "^2.3.5",
     "mongoose": "^4.1.11",
-    "mongoose-paginate": "^4.2.0"
+    "mongoose-paginate": "^4.2.0",
+    "nodemon": "^1.8.1",
+    "vinyl-buffer": "^1.0.0"
   },
   "devDependencies": {
     "babelify": "^6.3.0",

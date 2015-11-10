@@ -5,7 +5,6 @@
     <div class="col-md-8 col-md-offset-2">
         <table class="table table-hover">
             <thead>
-                <th>Cliente</th>
                 <th>Data de Entrega</th>
                 <th>Horário de entrega</th>
                 <th>Endereço</th>
@@ -13,15 +12,14 @@
                 <th></th>
             </thead>
             <tbody>
-                <tr ng-repeat="data in valores">
-                    <td>{{data.cliente}}</td>
-                    <td>{{data.data}}</td>
-                    <td>{{data.horario}}</td>
-                    <td>{{data.endereco}}</td>
-                    <td>{{data.quantidade}}</td>
+                <tr ng-repeat="data in encomendas">
+                    <td>{{data.dataSolicitacao}}</td>
+                    <td>{{data.dataEntrega}}</td>
+                    <td>{{data.enderecoEntrega}}</td>
+                    <td>{{data.status}}</td>
                     <td>
-                        <button class="btn btn-info" ng-click="alterar($index)">Alterar <span class="fa fa-edit"></span></button>
-                        <button class="btn btn-danger" ng-click="remover($index)"><span class="fa fa-remove"></span></button>
+                        <button class="btn btn-info" ng-click="alterar(data._id)">Alterar <span class="fa fa-edit"></span></button>
+                        <button class="btn btn-danger" ng-click="remover(data._id)"><span class="fa fa-remove"></span></button>
                     </td>
                 </tr>
             </tbody>

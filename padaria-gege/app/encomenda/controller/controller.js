@@ -32,7 +32,7 @@ function updateEncomenda(req,res){
 
 function saveEncomenda(req,res){
   Service.save(req.body, (err,data) => {
-    if(err) res.status(422).send(err.errors.type.properties.message);
+    if(err) res.status(422).send(err.errors);
     res.json(data);
   });
 }

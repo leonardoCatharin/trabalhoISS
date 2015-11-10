@@ -64,6 +64,7 @@ console.log(`The server is running on port: ${port}`);
  */
 require(__dirname + '/app/produto/route/route')(app);
 require(__dirname + '/app/usuario/route/route')(app);
+require(__dirname + '/app/encomenda/route/route')(app);
 
 /*
   Neste trecho de código estamos fazendo a conexão com o banco de dados.
