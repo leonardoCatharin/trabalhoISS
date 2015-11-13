@@ -11,14 +11,20 @@ angular.module('app.encomenda', ['ui.router'])
             .state('encomenda.novo', {
                 url: "/novo"
                 , templateUrl: 'app/encomenda/form.html'
-                , controller: 'EncomendaNovoController'
+                , controller: 'EncomendaFormController'
+                , resolve:  {
+                    entity:[function(){
+                        return {};
+                    }]
+                }
             })
             .state('encomenda.editar', { // isso é um estado
                 url: "/{id}"// isso  é uma rota
-                , templateUrl: 'encomenda/form.html'
-                , controller: 'EncomendaEditarController'
-                ,resolve:  {
-                    entity:['EmcomendaService','$stateParams',function(EncomendaService,$stateParams){
+                , templateUrl: 'app/encomenda/form.html'
+                , controller: 'EncomendaFormController'
+                , resolve:  {
+                    entity:['EncomendaService','$stateParams',function(EncomendaService,$stateParams){
+                        console.log('asdasdads')
                         return EncomendaService.getById($stateParams.id).then(function(data){
                             return data.data;
                         })
@@ -27,6 +33,7 @@ angular.module('app.encomenda', ['ui.router'])
             });
     }])
     .controller('EncomendaListaController', ['$scope','$state','EncomendaService',function ($scope,$state,EncomendaService) {
+
         function getDados(){
             EncomendaService.get().then(function(data){
                 $scope.encomendas = data.data;
@@ -41,18 +48,20 @@ angular.module('app.encomenda', ['ui.router'])
         }
 
         $scope.alterar = function(id){
-            $state.go('encomenda.editar',{id:id})
+            console.log(id)
+            $state.go('encomenda.editar',{id:id});
         }
     }])
-    .controller('EncomendaNovoController', ['$scope','EncomendaService',function ($scope,EncomendaService) {
-            $scope.save = function(entity){
-            entity.dataSolicitacao = new Date();
-            entity.horaEntrega = 'asdasda'
-            entity.status = 'sdfasdasd'
-            console.log(entity);
-            EncomendaService.save(entity).then(function(data){
-                $state.go('encomenda.lista');
-            })
+    .controller('EncomendaFormController', ['$scope','EncomendaService','entity',function ($scope,EncomendaService, entity) {
+        $scope.entity = entity || {};
+        $scope.save = function(entity){
+            if(entity._id == null){
+                entity.dataSolicitacao = new Date();
+                entity.horaEntrega = entity.horaEntrega.toString();
+                EncomendaService.save(entity).then(function(data){
+                    $state.go('encomenda.lista');
+                })
+            }
         }
 
         $scope.remover = function(index){
@@ -63,27 +72,32 @@ angular.module('app.encomenda', ['ui.router'])
             $scope.valores.push(obj);
             $scope.produto = {valor:''}
         }
-    }])
-    .controller('EncomendaEditarController', ['$scope','seed',function ($scope,seed) {
-        $scope.opts = [
-            'MATÉRIA-PRIMA'
-            , 'REVENDA'
-            , 'MANUFATURA'
+
+        $scope.arrStatus = [
+            'EM PRODUÇÃO',
+            'FINALIZADO',
+            'ENTREGUE'
         ];
-        $scope.produtos = seed.produtos;
-        $scope.clientes = seed.clientes;
-        $scope.valores = [];
-        $scope.entity = {cliente:''};
-
-        $scope.remover = function(index){
-            $scope.valores.splice(index,1);
-        }
-
-        $scope.add = function(obj){
-            $scope.valores.push(obj);
-            $scope.produto = {valor:''}
-        }
+        $scope.entity.status = $scope.entity.status || $scope.arrStatus[0];
+        $scope.entity.horaEntrega = new Date($scope.entity.horaEntrega) || new Date();
+        $scope.entity.dataEntrega = new Date($scope.entity.dataEntrega) || new Date();  
     }])
+    // .controller('EncomendaEditarController', ['$scope','seed',function ($scope,seed) {
+    //     $scope.opts = [
+    //         'EM PRODUÇÃO',
+    //         'FINALIZADO',
+    //         'ENTREGUE'
+    //     ];
+
+    //     $scope.remover = function(index){
+    //         $scope.valores.splice(index,1);
+    //     }
+
+    //     $scope.add = function(obj){
+    //         $scope.valores.push(obj);
+    //         $scope.produto = {valor:''}
+    //     }
+    // }])
 
     .service('EncomendaService',['$http',function($http){
         var url = 'http://localhost:8000/api/encomenda';

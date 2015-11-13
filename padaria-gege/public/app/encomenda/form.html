@@ -18,9 +18,14 @@
             </div>
 
             <div class="col-md-12">
-                <label for="horario">Horario de entrega <strong class="text-danger" ng-show="!entity.horario">
+                <label for="status">Status <strong class="text-danger" ng-show="!entity.status"> *</strong></label>
+                <select id="status" type="text" ng-model="entity.status" class="form-control" required ng-options="status for status in arrStatus track by status"/></select>
+            </div>
+
+            <div class="col-md-12">
+                <label for="horario">Horario de entrega <strong class="text-danger" ng-show="!entity.horaEntrega">
                     *</strong></label>
-                <input ng-model="horaEntrega" name="horario" type="time" id="horario" class="form-control" required/>
+                <input ng-model="entity.horaEntrega" name="horario" type="time" id="horario" class="form-control" required/>
             </div>
         </div>
 
