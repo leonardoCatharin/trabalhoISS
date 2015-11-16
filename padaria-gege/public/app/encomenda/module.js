@@ -12,19 +12,14 @@ angular.module('app.encomenda', ['ui.router'])
                 url: "/novo"
                 , templateUrl: 'app/encomenda/form.html'
                 , controller: 'EncomendaFormController'
-                , resolve:  {
-                    entity:[function(){
-                        return {};
-                    }]
                 }
             })
             .state('encomenda.editar', { // isso é um estado
-                url: "/{id}"// isso  é uma rota
+                url: "/:id"// isso  é uma rota
                 , templateUrl: 'app/encomenda/form.html'
                 , controller: 'EncomendaFormController'
                 , resolve:  {
                     entity:['EncomendaService','$stateParams',function(EncomendaService,$stateParams){
-                        console.log('asdasdads')
                         return EncomendaService.getById($stateParams.id).then(function(data){
                             return data.data;
                         })
@@ -48,17 +43,22 @@ angular.module('app.encomenda', ['ui.router'])
         }
 
         $scope.alterar = function(id){
-            console.log(id)
+            console.log(id);
             $state.go('encomenda.editar',{id:id});
         }
     }])
-    .controller('EncomendaFormController', ['$scope','EncomendaService','entity',function ($scope,EncomendaService, entity) {
+    .controller('EncomendaFormController', ['$scope','$state','EncomendaService','entity',function ($scope,$state,EncomendaService, entity) {
         $scope.entity = entity || {};
         $scope.save = function(entity){
             if(entity._id == null){
                 entity.dataSolicitacao = new Date();
-                entity.horaEntrega = entity.horaEntrega.toString();
+                entity.horaEntrega = $scope.horaEntrega.toString();
                 EncomendaService.save(entity).then(function(data){
+                    $state.go('encomenda.lista');
+                })
+            }else{
+                entity.horaEntrega = $scope.horaEntrega.toString();
+                EncomendaService.update(entity).then(function(data){
                     $state.go('encomenda.lista');
                 })
             }
@@ -78,9 +78,11 @@ angular.module('app.encomenda', ['ui.router'])
             'FINALIZADO',
             'ENTREGUE'
         ];
+
         $scope.entity.status = $scope.entity.status || $scope.arrStatus[0];
-        $scope.entity.horaEntrega = new Date($scope.entity.horaEntrega) || new Date();
+        $scope.horaEntrega = new Date($scope.entity.horaEntrega) || new Date();
         $scope.entity.dataEntrega = new Date($scope.entity.dataEntrega) || new Date();  
+        console.log($scope.entity);
     }])
     // .controller('EncomendaEditarController', ['$scope','seed',function ($scope,seed) {
     //     $scope.opts = [
