@@ -13,14 +13,14 @@
                 <th></th>
             </thead>
             <tbody>
-                <tr ng-repeat="data in valores">
-                    <td>{{data.nome}}</td>
-                    <td>{{data.tipo}}</td>
-                    <td>{{data.valor|currency:'R$'}}</td>
-                    <td>{{data.qntdMin}}</td>
+                <tr ng-repeat="data in list">
+                    <td>{{data.name}}</td>
+                    <td>{{data.type}}</td>
+                    <td>{{data.value | currency:'R$'}}</td>
+                    <td>{{data.lowestQuantity}}</td>
                     <td>
-                        <button class="btn btn-danger" ng-click="remover($index)"><span class="fa fa-remove"></span></button>
-                        <button class="btn btn-info" ng-click="alterar($index)">Alterar Produto <span class="fa fa-edit"></span></button>
+                      <button class="btn btn-info btn-sm" ng-click="alterar(data)">Alterar <span class="fa fa-edit"></span></button>
+                      <button class="btn btn-danger btn-sm" ng-click="remover(data)"><span class="fa fa-remove"></span></button>
                     </td>
                 </tr>
             </tbody>

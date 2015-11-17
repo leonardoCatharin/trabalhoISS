@@ -9,10 +9,10 @@ angular.module('app.encomenda', ['ui.router'])
                 ,controller:'EncomendaListaController'
             })
             .state('encomenda.novo', {
-                url: "/novo"
-                , templateUrl: 'app/encomenda/form.html'
-                , controller: 'EncomendaFormController'
-                }
+                 url: "/novo",
+                 templateUrl: 'app/encomenda/form.html',
+                 controller: 'EncomendaFormController'
+                
             })
             .state('encomenda.editar', { // isso é um estado
                 url: "/:id"// isso  é uma rota
@@ -81,7 +81,7 @@ angular.module('app.encomenda', ['ui.router'])
 
         $scope.entity.status = $scope.entity.status || $scope.arrStatus[0];
         $scope.horaEntrega = new Date($scope.entity.horaEntrega) || new Date();
-        $scope.entity.dataEntrega = new Date($scope.entity.dataEntrega) || new Date();  
+        $scope.entity.dataEntrega = new Date($scope.entity.dataEntrega) || new Date();
         console.log($scope.entity);
     }])
     // .controller('EncomendaEditarController', ['$scope','seed',function ($scope,seed) {

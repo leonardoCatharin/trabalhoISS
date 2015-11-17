@@ -1,0 +1,7 @@
+{
+  "verbose": true,
+  "ignoreRoot": ["./public"],
+  "events": {
+    "start": "gulp frontend:javascript"
+  }
+}

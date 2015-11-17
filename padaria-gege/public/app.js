@@ -13,6 +13,7 @@
   require('./app/usuario/module');
 
 
+
 angular.module('myApp', [
     'ui.router'
     , 'ui.utils.masks'

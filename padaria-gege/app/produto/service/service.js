@@ -3,8 +3,7 @@ let Product = require('../model/model');
 
 module.exports = new Service();
 
-function Service(){
-};
+function Service(){};
 
 Service.prototype.save = function(value, cb){
   let newProduct = new Product(value);

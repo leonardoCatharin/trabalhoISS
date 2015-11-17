@@ -11,9 +11,27 @@ let Product = {
     type: Number,
     required: true
   },
+  description: {
+    type: String,
+    required: true
+  },
+  supplier: {
+    type: String,
+    required: true
+  },
   lowestQuantity: {
     type: Number,
     required: true
+  },
+  value: {
+    type: Number,
+    required: true,
+    validate: {
+      validator(v){
+        return v >= 0;
+      },
+      message: 'O valor não pode ser negativo'
+    }
   },
   type: {
     type: String,

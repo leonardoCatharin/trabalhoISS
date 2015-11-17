@@ -1,38 +1,49 @@
 <div class="col-md-8 col-md-offset-2">
-    <form name="forms">
-
-    <div class="col-md-12">
-        <label for="nome">Nome <strong class="text-danger" ng-show="!entity.nome">*</strong></label>
-        <input id="nome" type="text" ng-model="entity.nome" class="form-control" required/>
+  <form name="ProdutoForm">
+    <div class="form-group">
+      <label for="nome"> Nome
+        <strong class="text-danger" ng-show="!entity.name" style="font-size: 1.2em;">*</strong>
+      </label>
+      <input id="name" type="text" ng-model="entity.name" class="form-control" required/>
     </div>
 
-    <div class="col-md-12">
-        <label for="descricao">Descriçao</label>
-        <input id="descricao" type="text" ng-model="entity.descricao" class="form-control"/>
+    <div class="form-group">
+      <label for="description">Descrição</label>
+      <input id="description" type="text" ng-model="entity.description" class="form-control" />
     </div>
 
-    <div class="col-md-12">
-        <label for="fornecedor">Fornecedor</label>
-        <input id="fornecedor" type="text" ng-model="entity.fornecedor" class="form-control"/>
+    <div class="form-group">
+      <label for="supplier">Fornecedor</label>
+      <input id="supplier" type="text" ng-model="entity.supplier" class="form-control" />
     </div>
 
-    <div class="col-md-12">
-        <label for="tipo">Tipo <strong class="text-danger" ng-show="!entity.tipo">*</strong></label>
-        <select ng-model="entity.tipo" name="tipo" class="form-control" id="tipo" ng-options="opt for opt in opts" required></select>
+    <div class="form-group">
+      <label for="type">type
+        <strong class="text-danger" ng-show="!entity.type">*</strong>
+      </label>
+      <select ng-model="entity.type" name="type" class="form-control" id="type" ng-options="opt for opt in opts" required>
+      </select>
     </div>
 
-    <div class="col-md-12">
-        <label for="preco">Preço <strong class="text-danger" ng-show="!entity.preco">*</strong></label>
-        <input id="preco" type="text" ng-model="entity.preco" class="form-control" ui-money-mask required/>
+    <div class="form-group">
+      <label for="value">Preço
+        <strong class="text-danger" ng-show="!entity.value">*</strong>
+      </label>
+      <input id="value" type="text" ng-model="entity.value" class="form-control" ui-money-mask required/>
     </div>
-    <div class="col-md-12">
-        <label for="qntd">Quantidade Minima <strong class="text-danger" ng-show="!entity.tipo">*</strong></label>
-        <input id="qntd" type="number" ng-model="entity.min" class="form-control" required/>
+    <div class="form-group">
+      <label for="qntd">Quantidade Minima
+        <strong class="text-danger" ng-show="!entity.lowestQuantity">*</strong>
+      </label>
+      <input id="qntd" type="number" ng-model="entity.lowestQuantity" class="form-control" required/>
     </div>
 
-    <div class="col-md-12" style="margin-top: 15px">
-        <button type="button" class="btn btn-primary pull-right" ui-sref="produto.lista" ng-disabled="forms.$invalid">Salvar <span class="fa fa-check"></span></button>
+    <div class="form-group">
+      <button type="button" class="btn btn-primary pull-right" ng-click="saveOrUpdate(entity)" ng-disabled="ProdutoForm.$invalid">
+        {{entity._id ? 'Atualizar' : 'Salvar'}}
+        <span class="fa fa-check"></span>
+      </button>
     </div>
     <span class="clearfix"></span>
-    </form>
+  </form>
 </div>
