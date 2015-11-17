@@ -28,10 +28,10 @@ let Encomenda = {
     type: String,
     required: true
   }
-  // ,produtos: [{
-  //   type: mongoose.Schema.ObjectId,
-  //   ref: 'Product'
-  // }]
+  ,produtos: [{
+    type: mongoose.Schema.ObjectId,
+    ref: 'Product'
+  }]
   
 };
 

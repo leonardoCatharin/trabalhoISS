@@ -32,7 +32,6 @@ angular.module('app.encomenda', ['ui.router'])
             });
     }])
     .controller('EncomendaListaController', ['$scope','$state','EncomendaService',function ($scope,$state,EncomendaService) {
-
         function getDados(){
             EncomendaService.get().then(function(data){
                 $scope.encomendas = data.data;
@@ -52,7 +51,8 @@ angular.module('app.encomenda', ['ui.router'])
         }
     }])
     .controller('EncomendaFormController', ['$scope','$state','EncomendaService','entity',function ($scope,$state,EncomendaService, entity) {
-        $scope.entity = entity || {};
+        $scope.entity = entity;
+        $scope.entity.produtos = $scope.entity.produtos || [];
         $scope.save = function(entity){
             if(entity._id == null){
                 entity.dataSolicitacao = new Date();
@@ -74,12 +74,13 @@ angular.module('app.encomenda', ['ui.router'])
         }
 
         $scope.remover = function(index){
-            $scope.valores.splice(index,1);
+            $scope.entity.produtos.splice(index,1);
         }
 
         $scope.add = function(obj){
-            $scope.valores.push(obj);
-            $scope.produto = {valor:''}
+            $scope.entity.produtos.push(angular.copy(obj));
+            $scope.produto = {};
+
         }
 
         $scope.arrStatus = [

@@ -43,7 +43,7 @@
                     <input id="quantidade" name="quantidade" type="number" ng-model="produto.quantidade" class="form-control">
                 </div>
                 <div class="col-md-12" style="margin-top: 15px">
-                    <button id="add" name="add" type="button" class="btn btn-info" ng-click="add(produto)" ng-disabled="!produto.valor.name || !produto.quantidade">
+                    <button id="add" name="add" type="button" class="btn btn-info" ng-click="add(produto)" ng-disabled="!produto.valor || !produto.quantidade">
                         Adicionar <span class="fa fa-plus"></span>
                     </button>
                 </div>
@@ -59,8 +59,8 @@
                 <th></th>
                 </thead>
                 <tbody>
-                <tr ng-repeat="data in valores">
-                    <td>{{data.valor.name}}</td>
+                <tr ng-repeat="data in entity.produtos track by $index">
+                    <td>{{data.valor}}</td>
                     <td>
                         {{data.quantidade}}
                     </td>
