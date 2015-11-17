@@ -1,5 +1,5 @@
 <div class="col-md-8 col-md-offset-2">
-    <form name="forms">
+    <form name="forms" novalidate>
         <div class="row">
             <div class="col-md-12">
                 <label for="nome">Cliente <strong class="text-danger" ng-show="!entity.cliente"> *</strong></label>
@@ -7,23 +7,25 @@
             </div>
 
             <div class="col-md-12">
-                <label for="endereco">Endereço de entrega <strong class="text-danger" ng-show="!entity.endereco">
+                <label for="endereco">Endereço de entrega <strong class="text-danger" ng-show="!entity.enderecoEntrega">
                     *</strong></label>
                 <input id="endereco" type="text" ng-model="entity.enderecoEntrega" class="form-control" required/>
             </div>
 
             <div class="col-md-12">
-                <label for="fixo">Data de entrega <strong class="text-danger" ng-show="!entity.data"> *</strong></label>
-                <input id="fixo" type="date" ng-model="entity.dataEntrega" class="form-control" required/>
+                <label for="fixo">Data solicitada de entrega <strong class="text-danger" ng-hide="dataEntrega"> *</strong></label>
+                <input id="fixo" type="date" ng-model="dataEntrega" class="form-control" required/>
+            {{(dataEntrega)}}
+
             </div>
 
             <div class="col-md-12">
-                <label for="status">Status <strong class="text-danger" ng-show="!entity.status"> *</strong></label>
+                <label for="status">Status<strong class="text-danger" ng-show="!entity.status">*</strong></label>
                 <select id="status" type="text" ng-model="entity.status" class="form-control" required ng-options="status for status in arrStatus track by status"/></select>
             </div>
 
             <div class="col-md-12">
-                <label for="horario">Horario de entrega <strong class="text-danger" ng-show="!entity.horaEntrega">
+                <label for="horario">Horário solicitado de entrega <strong class="text-danger" ng-show="!horaEntrega">
                     *</strong></label>
                 <input ng-model="horaEntrega" name="horario" type="time" id="horario" class="form-control" required/>
             </div>
@@ -71,7 +73,7 @@
         </div>
 
         <div class="col-md-12" style="margin-top: 15px">
-            <button type="button" class="btn btn-primary pull-right" ui-sref="encomenda.lista" ng-click="save(entity)">
+            <button type="button" class="btn btn-primary pull-right" ng-click="save(entity)">
             Salvar
             </button>
         </div>

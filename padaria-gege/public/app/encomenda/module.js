@@ -12,7 +12,6 @@ angular.module('app.encomenda', ['ui.router'])
                  url: "/novo",
                  templateUrl: 'app/encomenda/form.html',
                  controller: 'EncomendaFormController'
-                
             })
             .state('encomenda.editar', { // isso é um estado
                 url: "/:id"// isso  é uma rota
@@ -53,15 +52,21 @@ angular.module('app.encomenda', ['ui.router'])
             if(entity._id == null){
                 entity.dataSolicitacao = new Date();
                 entity.horaEntrega = $scope.horaEntrega.toString();
+                entity.dataEntrega = $scope.dataEntrega;
                 EncomendaService.save(entity).then(function(data){
                     $state.go('encomenda.lista');
-                })
+                },errorResponse)
             }else{
                 entity.horaEntrega = $scope.horaEntrega.toString();
+                entity.dataEntrega = $scope.dataEntrega;
                 EncomendaService.update(entity).then(function(data){
                     $state.go('encomenda.lista');
-                })
+                },errorResponse)
             }
+        }
+        function errorResponse(data){
+            console.log(data)
+            // alert("O cadastro não foi realizado com sucesso. Confira se os dados do formulário foram informados corretamente");
         }
 
         $scope.remover = function(index){
@@ -83,25 +88,14 @@ angular.module('app.encomenda', ['ui.router'])
         $scope.horaEntrega = new Date($scope.entity.horaEntrega) || new Date();
         $scope.entity.dataEntrega = new Date($scope.entity.dataEntrega) || new Date();
         console.log($scope.entity);
-    }])
-    // .controller('EncomendaEditarController', ['$scope','seed',function ($scope,seed) {
-    //     $scope.opts = [
-    //         'EM PRODUÇÃO',
-    //         'FINALIZADO',
-    //         'ENTREGUE'
-    //     ];
-
-    //     $scope.remover = function(index){
-    //         $scope.valores.splice(index,1);
-    //     }
-
-    //     $scope.add = function(obj){
-    //         $scope.valores.push(obj);
-    //         $scope.produto = {valor:''}
-    //     }
-    // }])
-
-    .service('EncomendaService',['$http',function($http){
+        if($scope.entity.horaEntrega !=  null){
+            $scope.horaEntrega = new Date($scope.entity.horaEntrega);
+        }
+        if($scope.entity.dataEntrega !=  null){
+            $scope.dataEntrega = new Date($scope.entity.dataEntrega);
+        }
+      }])
+    .service('EncomendaService',['$http', function($http){
         var url = 'http://localhost:8000/api/encomenda';
         this.get = function(page, size){
             return $http.get(url);
