@@ -31,7 +31,7 @@ Service.prototype.remove = function(_id,cb){
 }
 
 Service.prototype.update = function(obj, cb){
-  Encomenda.findOneAndUpdate(obj._id, obj, {
-    new: true
+  Encomenda.findOneAndUpdate({_id :obj._id}, obj, {
+    new: false
   },cb)
 }

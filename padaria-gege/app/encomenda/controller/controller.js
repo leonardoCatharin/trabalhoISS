@@ -26,7 +26,7 @@ function getEncomendaById(req,res){
 function updateEncomenda(req,res){
   Service.update(req.body, (err,data) => {
     if(err) res.status(404).send(err);
-    res.json(data);
+    res.json(err);
   });
 }
 

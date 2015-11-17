@@ -12,8 +12,14 @@ angular.module('app.encomenda', ['ui.router'])
                 url: "/novo"
                 , templateUrl: 'app/encomenda/form.html'
                 , controller: 'EncomendaFormController'
+                , resolve: {
+                    entity:
+                        function(){
+                        return {};
+                    }
                 }
             })
+
             .state('encomenda.editar', { // isso é um estado
                 url: "/:id"// isso  é uma rota
                 , templateUrl: 'app/encomenda/form.html'
@@ -53,15 +59,21 @@ angular.module('app.encomenda', ['ui.router'])
             if(entity._id == null){
                 entity.dataSolicitacao = new Date();
                 entity.horaEntrega = $scope.horaEntrega.toString();
+                entity.dataEntrega = $scope.dataEntrega;
                 EncomendaService.save(entity).then(function(data){
                     $state.go('encomenda.lista');
-                })
+                },errorResponse)
             }else{
                 entity.horaEntrega = $scope.horaEntrega.toString();
+                entity.dataEntrega = $scope.dataEntrega;
                 EncomendaService.update(entity).then(function(data){
                     $state.go('encomenda.lista');
-                })
+                },errorResponse)
             }
+        }
+        function errorResponse(data){
+            console.log(data)
+            // alert("O cadastro não foi realizado com sucesso. Confira se os dados do formulário foram informados corretamente");
         }
 
         $scope.remover = function(index){
@@ -80,9 +92,12 @@ angular.module('app.encomenda', ['ui.router'])
         ];
 
         $scope.entity.status = $scope.entity.status || $scope.arrStatus[0];
-        $scope.horaEntrega = new Date($scope.entity.horaEntrega) || new Date();
-        $scope.entity.dataEntrega = new Date($scope.entity.dataEntrega) || new Date();  
-        console.log($scope.entity);
+        if($scope.entity.horaEntrega !=  null){
+            $scope.horaEntrega = new Date($scope.entity.horaEntrega);
+        }
+        if($scope.entity.dataEntrega !=  null){
+            $scope.dataEntrega = new Date($scope.entity.dataEntrega);
+        }
     }])
     // .controller('EncomendaEditarController', ['$scope','seed',function ($scope,seed) {
     //     $scope.opts = [
