@@ -11,7 +11,12 @@ angular.module('app.encomenda', ['ui.router'])
             .state('encomenda.novo', {
                  url: "/novo",
                  templateUrl: 'app/encomenda/form.html',
-                 controller: 'EncomendaFormController'
+                 controller: 'EncomendaFormController',
+                 resolve: {
+                   entity: function(){
+                     return {};
+                   }
+                 }
             })
             .state('encomenda.editar', { // isso é um estado
                 url: "/:id"// isso  é uma rota
@@ -42,7 +47,7 @@ angular.module('app.encomenda', ['ui.router'])
         }
 
         $scope.alterar = function(id){
-            console.log(id);
+          console.log(id);
             $state.go('encomenda.editar',{id:id});
         }
     }])
@@ -66,7 +71,6 @@ angular.module('app.encomenda', ['ui.router'])
         }
         function errorResponse(data){
             console.log(data)
-            // alert("O cadastro não foi realizado com sucesso. Confira se os dados do formulário foram informados corretamente");
         }
 
         $scope.remover = function(index){
