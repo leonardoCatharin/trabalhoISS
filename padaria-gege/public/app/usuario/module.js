@@ -11,17 +11,20 @@ angular.module('app.usuario', ['ui.router'])
             .state('usuario.novo', {
                 url: "/novo"
                 , templateUrl: 'app/usuario/form.html'
-                , controller: 'UsuarioNovoController'
+                , controller: 'UsuarioFormController'
+                , resolve: {
+                    entity: function(){
+                        return {};
+                    }
+                }
             })
             .state('usuario.editar', {
                 url: "/{id}"
                 , templateUrl: 'app/usuario/form.html'
-                , controller: 'UsuarioEditarController'
+                , controller: 'UsuarioFormController'
                 , resolve: {
                     entity:['UsuarioService','$stateParams',function(UsuarioService,$stateParams){
-                        console.log(UsuarioService,$stateParams.id);
                         return UsuarioService.getById($stateParams.id).then(function(data){
-                            console.log(data)
                             return data.data;
                         })
                     }]
@@ -44,25 +47,8 @@ angular.module('app.usuario', ['ui.router'])
             $state.go('usuario.editar',{id:index})
         }
     }])
-    .controller('UsuarioNovoController', ['$scope','UsuarioService','$state',function ($scope,UsuarioService,$state) {
-        $scope.entity = {};
-        $scope.tipos = [
-            'VENDA'
-            , 'PRODUCAO'
-            , 'ENCOMENDA'
-            , 'ESTOQUE'
-            , 'ENTREGA'
-            , 'GERENCIA'
-          ]
-        $scope.save = function(entity){
-            UsuarioService.save(entity).then(function(data){
-                $state.go('usuario.lista');
-            })
-        }
-    }])
-    .controller('UsuarioEditarController', ['$scope', 'entity','UsuarioService','$state',function ($scope,entity,UsuarioService,$state) {
+    .controller('UsuarioFormController', ['$scope','UsuarioService','$state', 'entity',function ($scope,UsuarioService,$state,entity) {
         $scope.entity = entity;
-        $scope.confsenha = entity.senha;
         $scope.tipos = [
             'VENDA'
             , 'PRODUCAO'
@@ -72,9 +58,14 @@ angular.module('app.usuario', ['ui.router'])
             , 'GERENCIA'
           ]
         $scope.save = function(entity){
-            UsuarioService.update(entity).then(function(data){
-                $state.go('usuario.lista');
-            })
+            if(!entity._id){
+                UsuarioService.save(entity).then(resolveSaveUpdate)
+            }else{
+                UsuarioService.update(entity).then(resolveSaveUpdate)
+            }
+        }
+        function resolveSaveUpdate(){
+            $state.go('usuario.lista');
         }
     }])
     .service('UsuarioService',['$http',function($http){
