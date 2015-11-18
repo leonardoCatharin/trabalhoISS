@@ -20,7 +20,7 @@ angular.module('myApp', [
     , 'app.cliente'
     , 'app.funcionario'
     , 'app.venda'
-    , 'app.pedidocompra'
+    , 'app.pedidoCompra'
     , 'app.ordemproducao'
     , 'app.relatorio'
     , 'app.entrega'

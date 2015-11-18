@@ -25,7 +25,7 @@ let express   = require('express'),
     mOverride = require('method-override'),
     app       = express(),
     db        = mongoose.connection,
-    port      = process.env.PORT || 8000,
+    port      = process.env.PORT || 8084,
     config    = require('./config/config');
 
 /*
