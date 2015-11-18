@@ -36,6 +36,5 @@ Service.prototype.update = function(obj, cb){
 }
 
 Service.prototype.getByName = function(query, cb){
-  console.log(query)
   Product.find(query,cb);
 }
