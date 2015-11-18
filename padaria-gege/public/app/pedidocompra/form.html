@@ -1,0 +1,70 @@
+<div class="col-md-8 col-md-offset-2">
+    <form name="forms" novalidate>
+        <div class="row">
+            <div class="col-md-12">
+                <label for="nome">Fornecedor <strong class="text-danger" ng-show="!entity.fornecedor"> *</strong></label>
+                <input id="nome" type="text" typeahead="pro as pro.name for pro in fornecedores | filter:$viewValue | limitTo:8" ng-model="entity.forncedor" class="form-control" required/>
+            </div>
+
+            <div class="col-md-12">
+                <label for="codigoFatura">Código da Fatura <strong class="text-danger" ng-show="!entity.codigoFatura">
+                    *</strong></label>
+                <input id="codigoFatura" type="text" ng-model="entity.codigoFatura" class="form-control" required/>
+            </div>
+
+            <div class="col-md-12">
+                <label for="dataVencimento">Data de vencimento <strong class="text-danger" ng-hide="dataVencimento"> *</strong></label>
+                <input id="dataVencimento" type="date" ng-model="dataVencimento" class="form-control" required/>
+            </div>
+
+        </div>
+
+        <div class="row" style="margin-top: 15px">
+            <div class="well">
+                <div class="col-md-6">
+                    <label for="produto">Item do pedido de compra</label>
+                    <input id="produto" name="produto" type="text" ng-model="produto.valor"
+                           typeahead="pro as pro.name for pro in produtos | filter:$viewValue" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label for="quantidade">Quantidade</label>
+                    <input id="quantidade" name="quantidade" type="number" ng-model="produto.quantidade" class="form-control">
+                </div>
+                <div class="col-md-12" style="margin-top: 15px">
+                    <button id="add" name="add" type="button" class="btn btn-info" ng-click="add(produto)" ng-disabled="!produto.valor || !produto.quantidade">
+                        Adicionar <span class="fa fa-plus"></span>
+                    </button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <thead>
+                <th>Nome</th>
+                <th>Quantidade</th>
+                <th></th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="data in entity.produtos track by $index">
+                    <td>{{data.valor}}</td>
+                    <td>
+                        {{data.quantidade}}
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" type="button" ng-click="remover($index)"> <span class="fa fa-remove"></span></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-12" style="margin-top: 15px">
+            <button type="button" class="btn btn-primary pull-right" ng-click="save(entity)">
+            Salvar
+            </button>
+        </div>
+        <span class="clearfix"></span>
+    </form>
+</div>

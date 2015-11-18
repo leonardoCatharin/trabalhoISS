@@ -25,7 +25,7 @@ let express   = require('express'),
     mOverride = require('method-override'),
     app       = express(),
     db        = mongoose.connection,
-    port      = process.env.PORT || 3001,
+    port      = process.env.PORT || 8000,
     config    = require('./config/config');
 
 /*
@@ -65,6 +65,7 @@ console.log(`The server is running on port: ${port}`);
 require(__dirname + '/app/produto/route/route')(app);
 require(__dirname + '/app/usuario/route/route')(app);
 require(__dirname + '/app/encomenda/route/route')(app);
+require(__dirname + '/app/pedidocompra/route/route')(app);
 
 /*
   Neste trecho de código estamos fazendo a conexão com o banco de dados.

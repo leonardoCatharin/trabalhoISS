@@ -1,56 +1,56 @@
 'use strict';
 
-angular.module('app.encomenda', ['ui.router'])
+angular.module('app.pedidoCompra', ['ui.router'])
     .config(['$stateProvider', function ($stateProvider) {
         $stateProvider
-            .state('encomenda.lista', {
+            .state('pedidoCompra.lista', {
                 url: "/lista"
-                ,templateUrl: 'app/encomenda/lista.html'
-                ,controller:'EncomendaListaController'
+                ,templateUrl: 'app/pedidocompra/lista.html'
+                ,controller:'pedidoCompraListaController'
             })
-            .state('encomenda.novo', {
+            .state('pedidoCompra.novo', {
                  url: "/novo",
-                 templateUrl: 'app/encomenda/form.html',
-                 controller: 'EncomendaFormController',
+                 templateUrl: 'app/pedidocompra/form.html',
+                 controller: 'pedidoCompraFormController',
                  resolve: {
                    entity: function(){
                      return {};
                    }
                  }
             })
-            .state('encomenda.editar', { // isso é um estado
+            .state('pedidoCompra.editar', { // isso é um estado
                 url: "/:id"// isso  é uma rota
-                , templateUrl: 'app/encomenda/form.html'
-                , controller: 'EncomendaFormController'
+                , templateUrl: 'app/pedidocompra/form.html'
+                , controller: 'pedidoCompraFormController'
                 , resolve:  {
-                    entity:['EncomendaService','$stateParams',function(EncomendaService,$stateParams){
-                        return EncomendaService.getById($stateParams.id).then(function(data){
+                    entity:['pedidoCompraService','$stateParams',function(pedidoCompraService,$stateParams){
+                        return pedidoCompraService.getById($stateParams.id).then(function(data){
                             return data.data;
                         })
                     }]
                 }
             });
     }])
-    .controller('EncomendaListaController', ['$scope','$state','EncomendaService',function ($scope,$state,EncomendaService) {
+    .controller('pedidoCompraListaController', ['$scope','$state','pedidoCompraService',function ($scope,$state,pedidoCompraService) {
         function getDados(){
-            EncomendaService.get().then(function(data){
-                $scope.encomendas = data.data;
+            pedidoCompraService.get().then(function(data){
+                $scope.pedidoCompras = data.data;
             })
         }
         getDados();
 
         $scope.remover = function(id){// tudo q esta no scopo esta no html
-            EncomendaService.remove(id).then(function(data){
+            pedidoCompraService.remove(id).then(function(data){
                 getDados();
             })
         }
 
         $scope.alterar = function(id){
           console.log(id);
-            $state.go('encomenda.editar',{id:id});
+            $state.go('pedidoCompra.editar',{id:id});
         }
     }])
-    .controller('EncomendaFormController', ['$scope','$state','EncomendaService','entity',function ($scope,$state,EncomendaService, entity) {
+    .controller('pedidoCompraFormController', ['$scope','$state','pedidoCompraService','entity',function ($scope,$state,pedidoCompraService, entity) {
         $scope.entity = entity;
         $scope.entity.produtos = $scope.entity.produtos || [];
         $scope.save = function(entity){
@@ -58,15 +58,15 @@ angular.module('app.encomenda', ['ui.router'])
                 entity.dataSolicitacao = new Date();
                 entity.horaEntrega = $scope.horaEntrega.toString();
                 entity.dataEntrega = $scope.dataEntrega;
-                EncomendaService.save(entity).then(function(data){
-                    $state.go('encomenda.lista');
+                pedidoCompraService.save(entity).then(function(data){
+                    $state.go('pedidoCompra.lista');
                 },errorResponse)
             }else{
                 alert("teste");
                 entity.horaEntrega = $scope.horaEntrega.toString();
                 entity.dataEntrega = $scope.dataEntrega;
-                EncomendaService.update(entity).then(function(data){
-                    $state.go('encomenda.lista');
+                pedidoCompraService.update(entity).then(function(data){
+                    $state.go('pedidoCompra.lista');
                 },errorResponse)
             }
         }
@@ -101,8 +101,8 @@ angular.module('app.encomenda', ['ui.router'])
             $scope.dataEntrega = new Date($scope.entity.dataEntrega);
         }
       }])
-    .service('EncomendaService',['$http', function($http){
-        var url = 'http://localhost:8000/api/encomenda';
+    .service('pedidoCompraService',['$http', function($http){
+        var url = 'http://localhost:8000/api/pedidocompra';
         this.get = function(page, size){
             return $http.get(url);
         }

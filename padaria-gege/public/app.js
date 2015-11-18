@@ -5,7 +5,7 @@
   require('./app/cliente/module');
   require('./app/funcionario/module');
   require('./app/venda/module');
-  require('./app/pedidodecompra/module');
+  require('./app/pedidocompra/module');
   require('./app/ordemproducao/module');
   require('./app/relatorio/module');
   require('./app/entrega/module');
