@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.encomenda', ['ui.router'])
+angular.module('app.encomenda', ['ui.router','app.produto'])
     .config(['$stateProvider', function ($stateProvider) {
         $stateProvider
             .state('encomenda.lista', {
@@ -50,7 +50,7 @@ angular.module('app.encomenda', ['ui.router'])
             $state.go('encomenda.editar',{id:id});
         }
     }])
-    .controller('EncomendaFormController', ['$scope','$state','EncomendaService','entity',function ($scope,$state,EncomendaService, entity) {
+    .controller('EncomendaFormController', ['$scope','$state','EncomendaService','entity','ProdutoService',function ($scope,$state,EncomendaService, entity, ProdutoService) {
         $scope.entity = entity;
         $scope.entity.produtos = $scope.entity.produtos || [];
         $scope.save = function(entity){
@@ -81,8 +81,9 @@ angular.module('app.encomenda', ['ui.router'])
         $scope.add = function(obj){
             $scope.entity.produtos.push(angular.copy(obj));
             $scope.produto = {};
-
         }
+
+
 
         $scope.arrStatus = [
             'EM PRODUÇÃO',

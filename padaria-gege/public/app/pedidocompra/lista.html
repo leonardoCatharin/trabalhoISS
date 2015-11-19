@@ -1,22 +1,20 @@
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        <a class="btn btn-primary" ui-sref="encomenda.novo">Novo <span class="fa fa-plus"></span></a>
+        <a class="btn btn-primary" ui-sref="pedidoCompra.novo">Novo <span class="fa fa-plus"></span></a>
     </div>
     <div class="col-md-8 col-md-offset-2">
         <table class="table table-hover">
             <thead>
-                <th>Data de Entrega</th>
-                <th>Horário de entrega</th>
-                <th>Endereço</th>
-                <th>Status</th>
+                <th>Fornecedor</th>
+                <th>Código da fatura</th>
+                <th>Vencimento</th>
                 <th></th>
             </thead>
             <tbody>
-                <tr ng-repeat="data in encomendas">
-                    <td>{{data.dataSolicitacao}}</td>
-                    <td>{{data.dataEntrega}}</td>
-                    <td>{{data.enderecoEntrega}}</td>
-                    <td>{{data.status}}</td>
+                <tr ng-repeat="data in pedidoCompras">
+                    <td>{{data.fornecedor}}</td>
+                    <td>{{data.codigoFatura}}</td>
+                    <td>{{data.dataVencimento}}</td>
                     <td>
                         <button class="btn btn-info" ng-click="alterar(data._id)">Alterar <span class="fa fa-edit"></span></button>
                         <button class="btn btn-danger" ng-click="remover(data._id)"><span class="fa fa-remove"></span></button>

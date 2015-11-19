@@ -22,16 +22,16 @@
         <div class="row" style="margin-top: 15px">
             <div class="well">
                 <div class="col-md-6">
-                    <label for="produto">Item do pedido de compra</label>
-                    <input id="produto" name="produto" type="text" ng-model="produto.valor"
-                           typeahead="pro as pro.name for pro in produtos | filter:$viewValue" class="form-control">
+                    <label for="itemPedidoCompra">Item do pedido de compra</label>
+                    <input id="itemPedidoCompra" name="itemPedidoCompra" type="text" ng-model="itemPedidoCompra.valor"
+                           typeahead="pro as pro.name for pro in itensPedido | filter:$viewValue" class="form-control">
                 </div>
                 <div class="col-md-6">
                     <label for="quantidade">Quantidade</label>
-                    <input id="quantidade" name="quantidade" type="number" ng-model="produto.quantidade" class="form-control">
+                    <input id="quantidade" name="quantidade" type="number" ng-model="itemPedidoCompra.quantidade" class="form-control">
                 </div>
                 <div class="col-md-12" style="margin-top: 15px">
-                    <button id="add" name="add" type="button" class="btn btn-info" ng-click="add(produto)" ng-disabled="!produto.valor || !produto.quantidade">
+                    <button id="add" name="add" type="button" class="btn btn-info" ng-click="add(itemPedidoCompra)" ng-disabled="!itemPedidoCompra.valor || !itemPedidoCompra.quantidade">
                         Adicionar <span class="fa fa-plus"></span>
                     </button>
                 </div>
@@ -47,7 +47,7 @@
                 <th></th>
                 </thead>
                 <tbody>
-                <tr ng-repeat="data in entity.produtos track by $index">
+                <tr ng-repeat="data in entity.itensPedido track by $index">
                     <td>{{data.valor}}</td>
                     <td>
                         {{data.quantidade}}

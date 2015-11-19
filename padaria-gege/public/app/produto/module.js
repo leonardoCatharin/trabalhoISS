@@ -55,6 +55,12 @@ angular.module('app.produto', ['ui.router'])
       });
     }
 
+    function getByName(name){
+      return $http.get('/api/produto/name',{params:{name: name}}).then(function(data){
+        return data.data;
+      });
+    }
+
     function update(val){
       return $http.put('/api/produto/' + val._id, val);
     }

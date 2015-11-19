@@ -52,19 +52,15 @@ angular.module('app.pedidoCompra', ['ui.router'])
     }])
     .controller('pedidoCompraFormController', ['$scope','$state','pedidoCompraService','entity',function ($scope,$state,pedidoCompraService, entity) {
         $scope.entity = entity;
-        $scope.entity.produtos = $scope.entity.produtos || [];
+        $scope.entity.itensPedido = $scope.entity.itensPedido || [];
         $scope.save = function(entity){
             if(entity._id == null){
-                entity.dataSolicitacao = new Date();
-                entity.horaEntrega = $scope.horaEntrega.toString();
-                entity.dataEntrega = $scope.dataEntrega;
+                entity.dataVencimento = $scope.dataVencimento;
                 pedidoCompraService.save(entity).then(function(data){
                     $state.go('pedidoCompra.lista');
                 },errorResponse)
             }else{
-                alert("teste");
-                entity.horaEntrega = $scope.horaEntrega.toString();
-                entity.dataEntrega = $scope.dataEntrega;
+                entity.dataVencimento = $scope.dataVencimento;
                 pedidoCompraService.update(entity).then(function(data){
                     $state.go('pedidoCompra.lista');
                 },errorResponse)
@@ -75,34 +71,23 @@ angular.module('app.pedidoCompra', ['ui.router'])
         }
 
         $scope.remover = function(index){
-            $scope.entity.produtos.splice(index,1);
+            console.log($scope.entity.itensPedido);
+            $scope.entity.itensPedido.splice(index,1);
         }
 
         $scope.add = function(obj){
-            $scope.entity.produtos.push(angular.copy(obj));
-            $scope.produto = {};
+            $scope.entity.itensPedido.push(angular.copy(obj));
+            $scope.itemPedidoCompra = {};
 
         }
 
-        $scope.arrStatus = [
-            'EM PRODUÇÃO',
-            'FINALIZADO',
-            'ENTREGUE'
-        ];
-
-        $scope.entity.status = $scope.entity.status || $scope.arrStatus[0];
-        $scope.horaEntrega = new Date($scope.entity.horaEntrega) || new Date();
-        $scope.entity.dataEntrega = new Date($scope.entity.dataEntrega) || new Date();
-        console.log($scope.entity);
-        if($scope.entity.horaEntrega !=  null){
-            $scope.horaEntrega = new Date($scope.entity.horaEntrega);
-        }
-        if($scope.entity.dataEntrega !=  null){
-            $scope.dataEntrega = new Date($scope.entity.dataEntrega);
+        $scope.entity.dataVencimento = new Date($scope.entity.dataVencimento) || new Date();
+        if($scope.entity.dataVencimento !=  null){
+            $scope.dataVencimento = new Date($scope.entity.dataVencimento);
         }
       }])
     .service('pedidoCompraService',['$http', function($http){
-        var url = 'http://localhost:8000/api/pedidocompra';
+        var url = window.location.origin+'/api/pedidocompra';
         this.get = function(page, size){
             return $http.get(url);
         }

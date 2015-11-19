@@ -46,8 +46,8 @@ angular.module('myApp', [
             url: "/venda"
             ,templateUrl:'base.html'
         })
-        .state('pedidocompra', {
-            url: "/pedidocompra"
+        .state('pedidoCompra', {
+            url: "/pedidoCompra"
             ,templateUrl:'base.html'
         })
         .state('ordemproducao', {
