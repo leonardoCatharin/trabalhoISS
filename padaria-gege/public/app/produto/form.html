@@ -6,6 +6,12 @@
       </label>
       <input id="name" type="text" ng-model="entity.name" class="form-control" required/>
     </div>
+    <div class="form-group">
+      <label for="nome"> Código
+        <strong class="text-danger" ng-show="!entity.code" style="font-size: 1.2em;">*</strong>
+      </label>
+      <input id="name" type="number" ng-model="entity.code" class="form-control" required/>
+    </div>
 
     <div class="form-group">
       <label for="description">Descrição</label>
@@ -37,12 +43,21 @@
       </label>
       <input id="qntd" type="number" ng-model="entity.lowestQuantity" class="form-control" required/>
     </div>
-
+    <div class="form-group">
+      <label for="qntdd">Quantidade atual
+      </label>
+      <input id="qntd" disabled type="number" ng-model="entity.actualQuantity" class="form-control"/>
+    </div>
     <div class="form-group">
       <button type="button" class="btn btn-primary pull-right" ng-click="saveOrUpdate(entity)" ng-disabled="ProdutoForm.$invalid">
         {{entity._id ? 'Atualizar' : 'Salvar'}}
         <span class="fa fa-check"></span>
       </button>
+
+      <a class="btn btn-default pull-right" ui-sref="produto.lista" style="margin-right: 1%;">
+        Voltar
+        <span class="glyphicon glyphicon-th-list"></span>
+      </a>
     </div>
     <span class="clearfix"></span>
   </form>

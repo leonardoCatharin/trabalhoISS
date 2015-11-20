@@ -7,7 +7,9 @@ module.exports = (app) => {
   let url = '/api/produto';
 
   app.get(url, Controller.getProduct);
-  
+
+  app.get(`${url}/missing`, Controller.getMissingProducts);
+
   app.get(`${url}/name`, Controller.getByName);
 
   app.get(`${url}/:uid`, Controller.getProductById);

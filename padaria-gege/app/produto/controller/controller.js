@@ -4,6 +4,7 @@ let Service = require('../service/service');
 module.exports = {
   getProduct,
   getByName,
+  getMissingProducts,
   getProductById,
   updateProduct,
   saveProduct,
@@ -15,6 +16,13 @@ function getProduct(req, res) {
     if (err) res.status(500).send(err);
     res.json(data);
   });
+}
+
+function getMissingProducts(req, res) {
+  Service.getMissingProducts(req.page, req.limit, (err, data) => {
+    if (err) res.status(500).send(err);
+    res.json(data);
+  })
 }
 
 function getProductById(req, res) {

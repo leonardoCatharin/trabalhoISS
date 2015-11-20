@@ -11,75 +11,108 @@ angular.module('app.produto', ['ui.router'])
         url: "/novo",
         templateUrl: './app/produto/form.html',
         controller: 'ProdutoFormController',
-         resolve: {
-           entity: function(){
-             return {};
-           }
-         }
-      })
-    .state('produto.emfalta', {
-        url: "/falta",
-        templateUrl: './app/produto/lista.html',
-        controller: 'ProdutoEmFaltaController'
+        resolve: {
+          entity: function() {
+            return {
+              "type": null,
+              "lowestQuantity": null,
+              "code": null,
+              "value": null,
+              "name": null,
+              "supplier": null,
+              "description": null,
+              "actualQuantity": 0
+            };
+          }
+        }
       })
       .state('produto.editar', {
         url: "/:id",
         templateUrl: 'app/produto/form.html',
         controller: 'ProdutoFormController',
         resolve: {
-          entity: ['ProdutoService','$stateParams', function(ProdutoService, $stateParams){
+          entity: ['ProdutoService', '$stateParams', function(ProdutoService, $stateParams) {
             return ProdutoService
-                    .getId($stateParams.id)
-                    .then(function(data){
-                      return data;
-                    })
+              .getId($stateParams.id)
+              .then(function(data) {
+                return data;
+              })
           }]
         }
       });
   }])
-  .service('ProdutoService', ['$http', function($http){
-    this.get    = get;
-    this.getId  = getId;
-    this.update = update;
-    this.save   = save;
+  .service('ProdutoService', ['$http', function($http) {
+    this.get        = get;
+    this.getMissing = getMissing;
+    this.getId      = getId;
+    this.update     = update;
+    this.save       = save;
+    this.remove     = remove;
 
-    function get(page){
-        return $http.get('/api/produto', page).then(function(data){
-          return data.data;
-        });
-    }
-
-    function getId(id){
-      return $http.get('/api/produto/' + id).then(function(data){
+    function get(page) {
+      return $http.get('/api/produto', page).then(function(data) {
         return data.data;
       });
     }
 
-    function getByName(name){
-      return $http.get('/api/produto/name',{params:{name: name}}).then(function(data){
+    function getMissing(page) {
+      return $http.get('/api/produto/missing',page).then(function(data) {
         return data.data;
       });
     }
 
-    function update(val){
+    function getId(id) {
+      return $http.get('/api/produto/' + id).then(function(data) {
+        return data.data;
+      });
+    }
+
+    function getByName(name) {
+      return $http.get('/api/produto/name', {
+        params: {
+          name: name
+        }
+      }).then(function(data) {
+        return data.data;
+      });
+    }
+
+    function update(val) {
       return $http.put('/api/produto/' + val._id, val);
     }
 
-    function save(val){
-      console.log(val);
+    function save(val) {
       return $http.post('/api/produto', val);
     }
 
-  }])
-  .controller('ProdutoListaController', ['$scope', '$state','ProdutoService', function($scope, $state, ProdutoService) {
-    ProdutoService
-      .get(0)
-      .then(data => {
-        $scope.list = data;
-      })
+    function remove(id) {
+      return $http.delete('/api/produto/' + id);
+    }
 
-    $scope.remover = function(value) {
-      $scope.valores.splice(value, 1);
+  }])
+  .controller('ProdutoListaController', ['$scope', '$state', 'ProdutoService', function($scope, $state, ProdutoService) {
+
+
+    $scope.get = function(page) {
+      ProdutoService.get(0)
+        .then(data => {
+          $scope.list = data;
+        })
+    }
+
+    $scope.getMissing = function(page) {
+      ProdutoService.getMissing(0)
+        .then(data => {
+          $scope.missingList = data;
+        })
+    }
+
+    $scope.remover = function(id) {
+      ProdutoService
+        .remove(id)
+        .then(data => {
+          $scope.get(0);
+        })
     }
 
     $scope.alterar = function(value) {
@@ -87,17 +120,20 @@ angular.module('app.produto', ['ui.router'])
         id: value._id
       });
     }
+
+    $scope.get(0);
+    $scope.getMissing(0);
   }])
-  .controller('ProdutoFormController', ['$scope','entity', '$state', 'ProdutoService', function($scope, entity, $state, ProdutoService) {
+  .controller('ProdutoFormController', ['$scope', 'entity', '$state', 'ProdutoService', function($scope, entity, $state, ProdutoService) {
     $scope.entity = entity || {};
-    $scope.opts = [ 'MATERIA-PRIMA', 'REVENDA', 'MANUFATURADO']
+    $scope.opts = ['MATERIA-PRIMA', 'REVENDA', 'MANUFATURADO']
     $scope.saveOrUpdate = saveOrUpdate;
-    console.log('oi');
-    function saveOrUpdate(val){
+
+    function saveOrUpdate(val) {
       let promise;
       promise = val._id ? ProdutoService.update(val) : ProdutoService.save(val);
-      promise.then(function(data){
-        if(data.status == 200) $state.go('produto.lista');
+      promise.then(function(data) {
+        if (data.status == 200) $state.go('produto.lista');
       })
     }
   }])

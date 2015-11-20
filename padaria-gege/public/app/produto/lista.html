@@ -1,11 +1,16 @@
 <div class="container-fluid">
-  <div class="col-md-6">
+  <div class="col-md-12">
+    <a ui-sref="produto.novo" class="btn btn-primary btn-lg btn-block">Novo Produto
+      <span class="glyphicon glyphicon-plus"></span>
+    </a>
+  </div>
+  <div class="col-md-7">
     <h2>Produtos em Estoque</h2>
   </div>
-  <div class="col-md-3 col-md-offset-3">
+  <div class="col-md-3 col-md-offset-1">
     <h2>Produtos em Falta</h2>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-7">
     <table class="table table-responsive">
       <thead>
         <th>Nome</th>
@@ -22,25 +27,25 @@
           <td>{{data.lowestQuantity}}</td>
           <td>
             <button class="btn btn-info btn-sm" ng-click="alterar(data)">Alterar <span class="fa fa-edit"></span></button>
-            <button class="btn btn-danger btn-sm" ng-click="remover(data)"><span class="fa fa-remove"></span></button>
+            <button class="btn btn-danger btn-sm" ng-click="remover(data._id)"><span class="fa fa-remove"></span></button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-  <div class="col-md-3 col-md-offset-3">
+  <div class="col-md-4 col-md-offset-1">
     <table class="table table-responsive">
       <thead>
         <th>Nome</th>
-        <th></th>
       </thead>
       <tbody>
-        <tr ng-repeat="data in list">
-          <td>{{data.name}}</td>
+        <tr ng-show="missingList.length == 0">
           <td>
-            <button class="btn btn-info btn-sm" ng-click="alterar(data)">Alterar <span class="fa fa-edit"></span></button>
-            <button class="btn btn-danger btn-sm" ng-click="remover(data)"><span class="fa fa-remove"></span></button>
+            Não há produto faltando.
           </td>
+        </tr>
+        <tr ng-repeat="data in missingList">
+          <td>{{data.name}}</td>
         </tr>
       </tbody>
     </table>

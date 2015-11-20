@@ -19,6 +19,12 @@ Service.prototype.get = function(page,limit, cb){
   },cb);
 }
 
+Service.prototype.getMissingProducts = function(page, limit, cb){
+  Product.find({
+    $where: 'this.actualQuantity <= this.lowestQuantity'
+  }, cb);
+}
+
 Service.prototype.getId = function(id,cb){
   Product.findById(id, cb);
 }
