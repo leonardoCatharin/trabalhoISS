@@ -21,7 +21,7 @@ angular.module('myApp', [
     , 'app.funcionario'
     , 'app.venda'
     , 'app.pedidoCompra'
-    , 'app.ordemproducao'
+    , 'app.ordemProducao'
     , 'app.relatorio'
     , 'app.entrega'
     , 'app.encomenda'
@@ -50,7 +50,7 @@ angular.module('myApp', [
             url: "/pedidoCompra"
             ,templateUrl:'base.html'
         })
-        .state('ordemproducao', {
+        .state('ordemProducao', {
             url: "/ordemproducao"
             ,templateUrl:'base.html'
         })

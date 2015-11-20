@@ -1,46 +1,48 @@
 <div class="col-md-8 col-md-offset-2">
-     <div class="well">
+    <form name="forms" novalidate>
+        <div class="row">
+            <div class="col-md-12">
+                <label for="nome">Cliente <strong class="text-danger" ng-show="!entity.fornecedor"> *</strong></label>
+                <input id="nome" type="text" typeahead="pro as pro.name for pro in fornecedores | filter:$viewValue | limitTo:8" ng-model="entity.forncedor" class="form-control" required/>
+            </div>
 
-         <div class="col-md-6">
-             <label for="produto">Produto</label>
-             <input id="produto" name="produto" type="text" ng-model="produto.valor" typeahead="pro as pro.name for pro in produtos |filter:$viewValue" class="form-control">
-         </div>
-         <div class="col-md-6">
-             <label for="quantidade">Quantidade</label>
-             <input id="quantidade" name="quantidade" type="number" ng-model="produto.quantidade" class="form-control"/>
-         </div>
-         <div class="col-md-12" style="margin-top: 15px">
-             <button id="add" name="add" type="button" class="btn btn-info float-right" ng-click="add(produto)" ng-disabled="!produto.quantidade || !produto.valor.name">
-                 Adicionar <span class="fa fa-plus"></span>
-             </button>
-         </div>
-         <div class="clearfix"></div>
-     </div>
+            <div class="col-md-12">
+                <label for="dataPrazo">Data prazo <strong class="text-danger" ng-hide="dataPrazo"> *</strong></label>
+                <input id="dataPrazo" type="date" ng-model="dataPrazo" class="form-control" required/>
+            </div>
 
-    <div class="col-md-8 col-md-offset-2">
-        <table class="table table-">
-            <thead>
-            <th>Nome</th>
-            <th>Valor</th>
-            <th>Quantidade</th>
-            <th></th>
-            </thead>
-            <tbody>
-            <tr ng-repeat="data in valores">
-                <td>{{data.valor.name}}</td>
-                <td>{{data.valor.value}}</td>
-                <td>
-                    {{data.quantidade}}
-                </td>
-                <td>
-                    <button class="btn btn-danger" ng-click="remover($index)"><span class="fa fa-remove"></span></button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="col-md-12">
-        <button class="btn btn-danger" ui-sref="produto.lista">Cancelar</button>
-        <button class="btn btn-primary" ui-sref="produto.lista" ng-disabled="valores.length <= 0">Salvar</button>
-    </div>
+            <div class="col-md-12">
+                <label for="tipoOrdem">Solicitação<strong class="text-danger" ng-show="!entity.status">*</strong></label>
+                <select id="tipoOrdem" type="text" ng-model="entity.tipoOrdem" class="form-control" required ng-options="tipoOrdem for tipoOrdem in arrTipoOrdens track by tipoOrdem"/></select>
+            </div>
+        </div>
+
+        </td>
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <thead>
+                <th>Nome</th>
+                <th>Quantidade</th>
+                <th></th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="data in entity.itemProducao track by $index">
+                    <td>{{data.valor}}</td>
+                    <td>
+                        {{data.quantidade}}
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" type="button" ng-click="remover($index)"> <span class="fa fa-remove"></span></button>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-12" style="margin-top: 15px">
+            <button type="button" class="btn btn-primary pull-right" ng-click="save(entity)">
+            Salvar
+            </button>
+        </div>
+        <span class="clearfix"></span>
+    </form>
 </div>
