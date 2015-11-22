@@ -42,6 +42,8 @@ db
   e as adicionando ao express para criarmos a aplicação.
  */
 
+app.set('tokenWord', 'g2g23g2nba3mNLkj');
+
 app
   .use(cors())
   .use(mOverride('X-HTTP-Method-Override'))
@@ -62,6 +64,10 @@ console.log(`The server is running on port: ${port}`);
 
   Rotas chamam os controllers que chamam os services que usa o modelo.
  */
+
+
+require(__dirname + '/app/authentication/route/route')(app);
+
 require(__dirname + '/app/produto/route/route')(app);
 require(__dirname + '/app/usuario/route/route')(app);
 require(__dirname + '/app/encomenda/route/route')(app);

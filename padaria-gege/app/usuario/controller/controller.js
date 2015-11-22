@@ -1,5 +1,8 @@
 'use strict';
-let Service = require('../service/service');
+let Service = require('../service/service')
+    ,jwt = require('jsonwebtoken')
+    ,app = require('express')();
+app.set('tokenWord', 'g2g23g2nba3mNLkj');
 
 module.exports = {
   getUsuario,

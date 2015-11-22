@@ -27,7 +27,7 @@ angular.module('myApp', [
     , 'app.encomenda'
     , 'app.usuario'
 
-]).config(['$stateProvider', '$urlRouterProvider',($stateProvider, $urlRouterProvider) => {
+]).config(['$stateProvider', '$urlRouterProvider',($stateProvider, $urlRouterProvider, $httpProvider) => {
     $urlRouterProvider.otherwise("/produto");
     $stateProvider
         .state('produto', {
@@ -70,5 +70,24 @@ angular.module('myApp', [
             url: "/usuario"
             ,templateUrl:'base.html'
         });
+
+    $httpProvider.interceptors.push(($q, $injector, $window) => {
+        return {
+            'request': function (config) {
+                config.headers['x-access-token'] = $window.sessionStorage['token'] || 0;
+                return config;
+            },
+            'response': function (config) {
+                return config;
+            },
+            'responseError': function (rejection) {
+                if (rejection.status === 403) {
+                    var state = $injector.get('$state');
+                    state.go('login.log');
+                }
+                return $q.reject(rejection);
+            }
+        };
+    })
 
 }]);

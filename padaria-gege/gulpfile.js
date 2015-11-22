@@ -7,7 +7,8 @@ let gulp        = require('gulp'),
     source      = require('vinyl-source-stream'),
     buffer      = require('vinyl-buffer'),
     sourcemaps  = require('gulp-sourcemaps'),
-    uglify      = require('gulp-uglify');
+    uglify      = require('gulp-uglify'),
+    jwt         = require('jsonwebtoken');
 
 
 

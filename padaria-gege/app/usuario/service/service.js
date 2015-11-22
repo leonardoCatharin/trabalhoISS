@@ -35,3 +35,8 @@ Service.prototype.update = function(obj, cb){
     new: true
   },cb)
 }
+Service.prototype.authenticate = function(obj, cb){
+  Usuario.findOne({login:obj.login}, {
+    new: true
+  },cb)
+}
