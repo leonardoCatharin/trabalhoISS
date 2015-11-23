@@ -1,5 +1,4 @@
 'use strict';
-console.log('asdasdas')
 angular.module('app.usuario', ['ui.router'])
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider

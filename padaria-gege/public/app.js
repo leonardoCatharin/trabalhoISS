@@ -27,11 +27,15 @@ angular.module('myApp', [
     , 'app.encomenda'
     , 'app.usuario'
 
-]).config(['$stateProvider', '$urlRouterProvider',($stateProvider, $urlRouterProvider, $httpProvider) => {
-    $urlRouterProvider.otherwise("/produto");
+]).config(['$stateProvider', '$urlRouterProvider','$httpProvider',($stateProvider, $urlRouterProvider, $httpProvider) => {
+    $urlRouterProvider.otherwise("/login");
     $stateProvider
         .state('produto', {
             url: "/produto"
+            ,templateUrl:'base.html'
+        })
+        .state('home', {
+            url: "/home"
             ,templateUrl:'base.html'
         })
         .state('cliente', {
@@ -71,16 +75,19 @@ angular.module('myApp', [
             ,templateUrl:'base.html'
         });
 
-    $httpProvider.interceptors.push(($q, $injector, $window) => {
+    $httpProvider.interceptors.push(['$q', '$injector', '$window',($q, $injector, $window) => {
         return {
             'request': function (config) {
                 config.headers['x-access-token'] = $window.sessionStorage['token'] || 0;
+                console.log(config)
                 return config;
             },
             'response': function (config) {
+                console.log(config)
                 return config;
             },
             'responseError': function (rejection) {
+                console.log(rejection)
                 if (rejection.status === 403) {
                     var state = $injector.get('$state');
                     state.go('login.log');
@@ -88,6 +95,6 @@ angular.module('myApp', [
                 return $q.reject(rejection);
             }
         };
-    })
+    }])
 
 }]);

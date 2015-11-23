@@ -3,13 +3,13 @@
         <div class="well" style="margin-top: 50px">
 
             <label for="login">Login</label>
-            <input id="login" type="text" ng-model="login" class="form-control"/>
+            <input id="login" type="text" ng-model="user.login" class="form-control"/>
             <label for="senha">Senha</label>
-            <input id="senha" type="password" ng-model="senha" class="form-control"/>
+            <input id="senha" type="password" ng-model="user.senha" class="form-control"/>
 
             <div class="col-md-12" style="margin-top: 15px">
-                <button type="button" class="btn btn-primary pull-right" ui-sref="produto.lista"
-                        ng-disabled="!login || !senha">Login</button>
+                <button type="button" class="btn btn-primary pull-right" ng-click="doLogin(user)"
+                        ng-disabled="!user.login || !user.senha" >Login</button>
             </div>
                 <span class="clearfix"></span>
         </div>
