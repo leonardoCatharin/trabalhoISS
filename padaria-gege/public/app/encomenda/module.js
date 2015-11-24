@@ -103,7 +103,7 @@ angular.module('app.encomenda', ['ui.router','app.produto'])
         }
       }])
     .service('EncomendaService',['$http', function($http){
-        var url = 'http://localhost:8000/api/encomenda';
+        var url = window.location.origin+'/api/encomenda';
         this.get = function(page, size){
             return $http.get(url);
         }

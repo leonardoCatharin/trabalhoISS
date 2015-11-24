@@ -79,15 +79,12 @@ angular.module('myApp', [
         return {
             'request': function (config) {
                 config.headers['token'] = $window.sessionStorage['token'];
-                console.log(config)
                 return config;
             },
             'response': function (config) {
-                console.log(config)
                 return config;
             },
             'responseError': function (rejection) {
-                console.log(rejection)
                 if (rejection.status === 403) {
                     var state = $injector.get('$state');
                     state.go('login.log');

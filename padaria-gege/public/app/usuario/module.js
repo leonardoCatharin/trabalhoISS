@@ -68,7 +68,7 @@ angular.module('app.usuario', ['ui.router'])
         }
     }])
     .service('UsuarioService',['$http',function($http){
-        var url = 'http://localhost:8000/api/usuario';
+        var url = window.location.origin+'/api/usuario';
         this.get = function(page, size){
             return $http.get(url);
         }

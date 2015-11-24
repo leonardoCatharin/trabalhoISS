@@ -23,7 +23,7 @@ angular.module('app.login', ['ui.router'])
         this.doLogin = (user)=> {
             return $http.post(url, user);
         }
-        this.doLogout = ()=>{
-            localStorage.removeItem('token');
+        this.doLogout = function(){
+            sessionStorage.removeItem('token');
         }
     }])
