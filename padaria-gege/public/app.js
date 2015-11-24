@@ -78,7 +78,7 @@ angular.module('myApp', [
     $httpProvider.interceptors.push(['$q', '$injector', '$window',($q, $injector, $window) => {
         return {
             'request': function (config) {
-                config.headers['x-access-token'] = $window.sessionStorage['token'] || 0;
+                config.headers['token'] = $window.sessionStorage['token'];
                 console.log(config)
                 return config;
             },
