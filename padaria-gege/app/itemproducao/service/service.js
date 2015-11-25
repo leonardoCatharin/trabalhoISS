@@ -8,13 +8,6 @@ function Service(){
 
 Service.prototype.save = function(value, cb){
   let newEncomenda = new Encomenda(value);
-  console.log(value);
-
-  let ordemProducao = {
-    itemProducaoLista:value.produtos
-    //,
-  }
-
   Encomenda.create(newEncomenda, cb)
 }
 

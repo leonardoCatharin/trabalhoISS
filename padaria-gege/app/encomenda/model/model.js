@@ -21,17 +21,17 @@ let Encomenda = {
     required: true
   },
   horaEntrega: {
-    type: String,
+    type: Date,
     required: true
   },
   status: {
     type: String,
     required: true
   }
-  ,produtos: [{
+  ,ordemProducao: {
     type: mongoose.Schema.ObjectId,
-    ref: 'Product'
-  }]
+    ref: 'OrdemProducao'
+  }
   
 };
 

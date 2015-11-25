@@ -16,11 +16,10 @@ let OrdemProducao = {
     type: String,
     required: true
   }
-
-  // itemProducao: [{
-  //   type: mongoose.Schema.ObjectId,
-  //   ref: 'Produto'
-  // }]
+  ,itemProducaoLista: [{
+     type: mongoose.Schema.ObjectId,
+     ref: 'ItemProducao'
+   }]
   
 };
 

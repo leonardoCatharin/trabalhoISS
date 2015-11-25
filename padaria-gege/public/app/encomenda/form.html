@@ -15,7 +15,6 @@
             <div class="col-md-12">
                 <label for="fixo">Data solicitada de entrega <strong class="text-danger" ng-hide="dataEntrega"> *</strong></label>
                 <input id="fixo" type="date" ng-model="dataEntrega" class="form-control" required/>
-            {{(dataEntrega)}}
 
             </div>
 
@@ -36,7 +35,7 @@
                 <div class="col-md-6">
                     <label for="produto">Produto</label>
                     <input id="produto" name="produto" type="text" ng-model="produto.valor"
-                           typeahead="pro as pro.name for pro in produtos | filter:$viewValue" class="form-control">
+                           typeahead="pro as pro.name for pro in searchProduct($viewValue)" class="form-control">
                 </div>
                 <div class="col-md-6">
                     <label for="quantidade">Quantidade</label>
@@ -60,7 +59,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="data in entity.produtos track by $index">
-                    <td>{{data.valor}}</td>
+                    <td>{{data.valor.name}}</td>
                     <td>
                         {{data.quantidade}}
                     </td>

@@ -13,8 +13,8 @@
             </thead>
             <tbody>
                 <tr ng-repeat="data in encomendas">
-                    <td>{{data.dataSolicitacao}}</td>
-                    <td>{{data.dataEntrega}}</td>
+                    <td>{{data.dataEntrega |date:'dd/MM/yyyy'}}</td>
+                    <td>{{data.horaEntrega|date:'HH:MM'}}</td>
                     <td>{{data.enderecoEntrega}}</td>
                     <td>{{data.status}}</td>
                     <td>

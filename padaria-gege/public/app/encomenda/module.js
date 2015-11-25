@@ -54,17 +54,15 @@ angular.module('app.encomenda', ['ui.router','app.produto'])
         $scope.entity = entity;
         $scope.entity.produtos = $scope.entity.produtos || [];
         $scope.save = function(entity){
+            console.log(entity)
+                entity.horaEntrega = $scope.horaEntrega;
+                entity.dataEntrega = $scope.dataEntrega;
             if(entity._id == null){
                 entity.dataSolicitacao = new Date();
-                entity.horaEntrega = $scope.horaEntrega.toString();
-                entity.dataEntrega = $scope.dataEntrega;
                 EncomendaService.save(entity).then(function(data){
                     $state.go('encomenda.lista');
                 },errorResponse)
             }else{
-                alert("teste");
-                entity.horaEntrega = $scope.horaEntrega.toString();
-                entity.dataEntrega = $scope.dataEntrega;
                 EncomendaService.update(entity).then(function(data){
                     $state.go('encomenda.lista');
                 },errorResponse)
@@ -72,6 +70,12 @@ angular.module('app.encomenda', ['ui.router','app.produto'])
         }
         function errorResponse(data){
             console.log(data)
+        }
+
+        $scope.searchProduct = function(param){
+            return ProdutoService.getByName(param).then(function(data){
+                return data;
+            })
         }
 
         $scope.remover = function(index){
@@ -94,7 +98,6 @@ angular.module('app.encomenda', ['ui.router','app.produto'])
         $scope.entity.status = $scope.entity.status || $scope.arrStatus[0];
         $scope.horaEntrega = new Date($scope.entity.horaEntrega) || new Date();
         $scope.entity.dataEntrega = new Date($scope.entity.dataEntrega) || new Date();
-        console.log($scope.entity);
         if($scope.entity.horaEntrega !=  null){
             $scope.horaEntrega = new Date($scope.entity.horaEntrega);
         }

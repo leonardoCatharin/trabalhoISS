@@ -48,6 +48,7 @@ angular.module('app.produto', ['ui.router'])
     this.update     = update;
     this.save       = save;
     this.remove     = remove;
+    this.getByName  = getByName;
 
     function get(page) {
       return $http.get('/api/produto', page).then(function(data) {
