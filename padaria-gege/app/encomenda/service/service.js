@@ -1,5 +1,6 @@
 'use strict';
-let Encomenda = require('../model/model');
+let Encomenda = require('../model/model'),
+    OrdemProducaoService = require('../../ordemproducao/service/service');
 
 module.exports = new Service();
 
@@ -7,15 +8,18 @@ function Service(){
 };
 
 Service.prototype.save = function(value, cb){
-  let newEncomenda = new Encomenda(value);
-  console.log(value);
 
   let ordemProducao = {
     itemProducaoLista:value.produtos
-    //,
+    ,dataPrazo:value.dataEntrega
+    ,tipoOrdem:'ENCOMENDA'
   }
+  OrdemProducaoService.save(ordemProducao,(err,data)=>{
+    value.ordemProducao = data;
+    let newEncomenda = new Encomenda(value);
+    Encomenda.create(newEncomenda, cb);
+  })
 
-  Encomenda.create(newEncomenda, cb)
 }
 
 Service.prototype.get = function(page,limit, cb){
@@ -28,7 +32,7 @@ Service.prototype.get = function(page,limit, cb){
 }
 
 Service.prototype.getId = function(id,cb){
-  Encomenda.findById(id, cb);
+  Encomenda.findById(id).populate('ordemProducao').exec(cb);
 }
 
 Service.prototype.remove = function(_id,cb){
