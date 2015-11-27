@@ -34,8 +34,6 @@ function authenticate(req, res) {
 }
 
 function validateToken(req, res, next) {
-
-            console.log(req, res, next)
     var token = req.body.token || req.query.token || req.headers['token'];
     if (token) {
         jwt.verify(token, app.get('tokenWord'), (err, decoded) => {

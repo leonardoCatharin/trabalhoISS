@@ -64,6 +64,7 @@ angular.module('app.produto', ['ui.router'])
 
     function getId(id) {
       return $http.get('/api/produto/' + id).then(function(data) {
+        console.log(data)
         return data.data;
       });
     }

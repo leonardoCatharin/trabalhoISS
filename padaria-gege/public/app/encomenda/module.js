@@ -46,7 +46,6 @@ angular.module('app.encomenda', ['ui.router','app.produto'])
         }
 
         $scope.alterar = function(id){
-          console.log(id);
             $state.go('encomenda.editar',{id:id});
         }
     }])

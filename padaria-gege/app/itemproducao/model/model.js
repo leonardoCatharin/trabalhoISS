@@ -9,7 +9,7 @@ let ItemProducao = {
    }
   ,produto: {
     type: mongoose.Schema.ObjectId,
-    ref: 'Product',
+    ref: 'Produto',
     required:true
   }
   

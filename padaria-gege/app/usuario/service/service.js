@@ -14,11 +14,11 @@ Service.prototype.save = function(value, cb){
 Service.prototype.get = function(page,limit, cb){
   page = page || 1;
   limit = limit || 10;
-  Usuario.paginate({}, {
-    page,
-    limit
-  },cb);
-}
+  Usuario
+      .populate('user')
+      .exec(cb);
+      //.paginate({}, {page, limit },cb);
+};
 
 Service.prototype.getId = function(id,cb){
   Usuario.findById(id, cb);

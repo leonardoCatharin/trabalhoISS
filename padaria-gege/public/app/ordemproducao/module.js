@@ -23,7 +23,7 @@ angular.module('app.ordemProducao', ['ui.router'])
                 , templateUrl: 'app/ordemproducao/form.html'
                 , controller: 'ordemProducaoFormController'
                 , resolve:  {
-                    entity:['ordemProducaoService','$stateParams',function(ordemProducao,$stateParams){
+                    entity:['ordemProducaoService','$stateParams',function(ordemProducaoService,$stateParams){
                         return ordemProducaoService.getById($stateParams.id).then(function(data){
                             return data.data;
                         })
@@ -51,8 +51,9 @@ angular.module('app.ordemProducao', ['ui.router'])
     }])
     .controller('ordemProducaoFormController', ['$scope','$state','ordemProducaoService','entity','ProdutoService',function ($scope,$state,ordemProducaoService, entity, ProdutoService) {
         $scope.entity = entity;
-        $scope.entity.itemProducao = $scope.entity.itemProducao || [];
+        $scope.entity.itemProducaoLista = $scope.entity.itemProducaoLista || [];
 
+        console.log($scope.entity);
         $scope.save = function(entity){
             if(entity._id == null){
                 entity.dataPrazo = $scope.dataPrazo;
@@ -70,12 +71,7 @@ angular.module('app.ordemProducao', ['ui.router'])
             console.log(data)
         }
 
-        $scope.arrTipoOrdens = [
-            'INTERNA',
-            'CLIENTE'
-        ];
-        $scope.entity.tipoOrdem = $scope.arrTipoOrdens[0];
-
+        $scope.entity.tipoOrdem = entity.tipoOrdem;
         $scope.entity.dataPrazo = new Date($scope.entity.dataPrazo) || new Date();
         if($scope.entity.dataPrazo !=  null){
             $scope.dataPrazo = new Date($scope.entity.dataPrazo);

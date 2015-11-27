@@ -26,7 +26,7 @@ Service.prototype.getMissingProducts = function(page, limit, cb){
 }
 
 Service.prototype.getId = function(id,cb){
-  Product.findById(id, cb);
+  Product.findById(id).populate('user').exec(cb);
 }
 
 Service.prototype.remove = function(_id,cb){

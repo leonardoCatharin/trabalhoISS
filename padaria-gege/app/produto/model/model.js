@@ -19,6 +19,10 @@ let Product = {
     type: String,
     required: true
   },
+  user :{
+    type: mongoose.Schema.ObjectId,
+    ref: 'Usuario'
+  },
   actualQuantity: {
     type: Number,
     required: true,
