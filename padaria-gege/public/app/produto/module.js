@@ -93,8 +93,6 @@ angular.module('app.produto', ['ui.router'])
 
   }])
   .controller('ProdutoListaController', ['$scope', '$state', 'ProdutoService', function($scope, $state, ProdutoService) {
-
-
     $scope.get = function(page) {
       ProdutoService.get(0)
         .then(data => {
@@ -126,10 +124,14 @@ angular.module('app.produto', ['ui.router'])
     $scope.get(0);
     $scope.getMissing(0);
   }])
-  .controller('ProdutoFormController', ['$scope', 'entity', '$state', 'ProdutoService', function($scope, entity, $state, ProdutoService) {
+  .controller('ProdutoFormController', ['$scope', 'entity', '$state', 'ProdutoService','FornecedorService', function($scope, entity, $state, ProdutoService, FornecedorService) {
     $scope.entity = entity || {};
     $scope.opts = ['MATERIA-PRIMA', 'REVENDA', 'MANUFATURADO']
     $scope.saveOrUpdate = saveOrUpdate;
+
+    $scope.searchFornecedor = function(name){
+      return FornecedorService.getByName(name)
+    }
 
     function saveOrUpdate(val) {
       let promise;

@@ -20,7 +20,8 @@
 
     <div class="form-group">
       <label for="supplier">Fornecedor</label>
-      <input id="supplier" type="text" ng-model="entity.supplier" class="form-control" />
+      <input id="produto" name="produto" type="text" ng-model="entity.supplier"
+             typeahead="pro as pro.nome for pro in searchFornecedor($viewValue)" class="form-control">
     </div>
 
     <div class="form-group">

@@ -1,0 +1,33 @@
+<div class="container-fluid">
+  <div class="col-md-10 col-md-offset-1">
+    <a ui-sref="produto.novo" class="btn btn-primary btn-lg btn-block">Novo Fornecedor
+      <span class="glyphicon glyphicon-plus"></span>
+    </a>
+  </div>
+  <div class="col-md-10 col-md-offset-1">
+    <h2>Fornecedores Cadastrados</h2>
+  </div>
+  <div class="col-md-10 col-md-offset-1">
+    <table class="table table-responsive">
+      <thead>
+        <th>Nome</th>
+        <th>Responsável</th>
+        <th>Email</th>
+        <th>Telefone</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="data in list">
+          <td>{{data.nome}}</td>
+          <td>{{data.responsavel}}</td>
+          <td>{{data.email}}</td>
+          <td>{{data.telefone}}</td>
+          <td>
+            <button class="btn btn-info btn-sm" ng-click="alterar(data)">Alterar <span class="fa fa-edit"></span></button>
+            <button class="btn btn-danger btn-sm" ng-click="remover(data._id)"><span class="fa fa-remove"></span></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

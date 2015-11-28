@@ -16,7 +16,8 @@ let Product = {
     required: true
   },
   supplier: {
-    type: String,
+    type: mongoose.Schema.ObjectId,
+    ref: 'Fornecedors',
     required: true
   },
   user :{
