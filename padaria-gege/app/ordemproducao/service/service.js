@@ -32,7 +32,6 @@ Service.prototype.getId = function(id,cb){
       path: 'produto'
     }, (err, data1) => {
       data.itemProducaoLista = data1;
-
       cb(err, data)
     });
 
