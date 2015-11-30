@@ -87,7 +87,7 @@ angular.module('myApp', [
             'responseError': function (rejection) {
                 if (rejection.status === 403) {
                     var state = $injector.get('$state');
-                    state.go('login.log');
+                    state.go('login');
                 }
                 return $q.reject(rejection);
             }
