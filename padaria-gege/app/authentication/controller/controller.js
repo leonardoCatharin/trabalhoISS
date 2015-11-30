@@ -18,9 +18,13 @@ function authenticate(req, res) {
             if (data.senha != req.body.senha) {
                 res.status(403).send('Authentication failed. Wrong password.')
             } else {
-                data.data = new Date();
-                let token = jwt.sign(data, app.get('tokenWord'), {
-                    expiresIn: 1000
+                data.date = new Date();
+                let tokenVar = {
+                    _id:data._id
+                    ,date: new Date()
+                }
+                let token = jwt.sign(tokenVar, app.get('tokenWord'), {
+                    expiresIn: '1m'
                 });
 
                 res.json({
@@ -34,19 +38,18 @@ function authenticate(req, res) {
 }
 
 function validateToken(req, res, next) {
+
     var token = req.body.token || req.query.token || req.headers['token'];
     if (token) {
         jwt.verify(token, app.get('tokenWord'), (err, decoded) => {
             if (err) {
                 return res.status(403).send({success: false, message: 'Failed to authenticate token.'});
             } else {
-                req.decoded = decoded;
                 next();
             }
         });
 
     } else {
-        console.log(403)
         return res.status(403).send({
             success: false,
             message: 'No token provided.'

@@ -3,6 +3,11 @@ let mongoose  = require('mongoose'),
     paginate  = require('mongoose-paginate');
 
 let OrdemProducao = {
+  // cliente: {
+  //   type: mongoose.Schema.ObjectId,
+  //   ref: 'Cliente'
+  // },
+
   dataPrazo: {
     type: Date,
     required: true
@@ -11,10 +16,11 @@ let OrdemProducao = {
     type: String,
     required: true
   }
-  ,itemProducaoLista: [{
-     type: mongoose.Schema.ObjectId,
-     ref: 'ItemProducao'
-   }]
+
+  // itemProducao: [{
+  //   type: mongoose.Schema.ObjectId,
+  //   ref: 'Produto'
+  // }]
   
 };
 

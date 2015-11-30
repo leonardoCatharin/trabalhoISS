@@ -1,7 +1,5 @@
 'use strict';
-let ordemProducao = require('../model/model'),
-    Item          = require('../../itemproducao/model/model'),
-    ItemProducao  = require('../../itemproducao/service/service');
+let ordemProducao = require('../model/model');
 
 module.exports = new Service();
 
@@ -9,12 +7,8 @@ function Service(){
 };
 
 Service.prototype.save = function(value, cb){
-
-  ItemProducao.save(value.itemProducaoLista,(err,data)=>{
-    value.itemProducaoLista = data;
-    let newordemProducao = new ordemProducao(value);
-    ordemProducao.create(newordemProducao, cb);
-  })
+  let newordemProducao = new ordemProducao(value);
+  ordemProducao.create(newordemProducao, cb)
 }
 
 Service.prototype.get = function(page,limit, cb){
@@ -27,6 +21,7 @@ Service.prototype.get = function(page,limit, cb){
 }
 
 Service.prototype.getId = function(id,cb){
+<<<<<<< HEAD
   ordemProducao.findById(id).populate('itemProducaoLista').exec((err, data) => {
     Item.populate(data.itemProducaoLista, {
       path: 'produto'
@@ -37,6 +32,10 @@ Service.prototype.getId = function(id,cb){
 
   });
 };
+=======
+  ordemProducao.findById(id, cb);
+}
+>>>>>>> abcb8712854eb03310c0c47b547dad71c1cfeb8b
 
 Service.prototype.remove = function(_id,cb){
   ordemProducao

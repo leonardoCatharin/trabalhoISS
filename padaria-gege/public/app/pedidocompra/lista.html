@@ -5,14 +5,16 @@
     <div class="col-md-8 col-md-offset-2">
         <table class="table table-hover">
             <thead>
+                <th>Fornecedor</th>
                 <th>Código da fatura</th>
                 <th>Vencimento</th>
                 <th></th>
             </thead>
             <tbody>
                 <tr ng-repeat="data in pedidoCompras">
+                    <td>{{data.fornecedor}}</td>
                     <td>{{data.codigoFatura}}</td>
-                    <td>{{data.dataVencimento |date:'dd/MM/yyyy'}}</td> 
+                    <td>{{data.dataVencimento}}</td>
                     <td>
                         <button class="btn btn-info" ng-click="alterar(data._id)">Alterar <span class="fa fa-edit"></span></button>
                         <button class="btn btn-danger" ng-click="remover(data._id)"><span class="fa fa-remove"></span></button>
