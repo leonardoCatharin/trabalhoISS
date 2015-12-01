@@ -75,7 +75,7 @@ angular.module('app.encomenda', ['ui.router','app.produto'])
             return ProdutoService.getByName(param).then(function(data){
                 return data;
             })
-        }
+        };
 
         $scope.remover = function(index){
             $scope.entity.produtos.splice(index,1);
