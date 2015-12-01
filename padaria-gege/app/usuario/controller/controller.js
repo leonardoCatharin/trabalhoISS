@@ -34,7 +34,6 @@ function updateUsuario(req,res){
 }
 
 function saveUsuario(req,res){
-  console.log(req,res)
   Service.save(req.body, (err,data) => {
     if(err) res.status(422).send(err.errors.type.properties.message);
     res.json(data);

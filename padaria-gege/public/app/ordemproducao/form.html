@@ -2,34 +2,47 @@
     <form name="forms" novalidate>
         <div class="row">
             <div class="col-md-12">
-                <label for="dataPrazo">Data prazo <strong class="text-danger" ng-hide="dataPrazo"> *</strong></label>
-                <input id="dataPrazo" type="date" ng-model="dataPrazo" class="form-control" readonly/>
+                <label for="nome">Cliente <strong class="text-danger" ng-show="!entity.fornecedor"> *</strong></label>
+                <input id="nome" type="text" typeahead="pro as pro.name for pro in fornecedores | filter:$viewValue | limitTo:8" ng-model="entity.forncedor" class="form-control" required/>
             </div>
 
             <div class="col-md-12">
-                <label for="tipoOrdem">Solicitação<strong class="text-danger" ng-show="!entity.tipoOrdem">*</strong></label>
-                <input id="tipoOrdem" type="text" ng-model="entity.tipoOrdem" class="form-control" readonly/></input>
+                <label for="dataPrazo">Data prazo <strong class="text-danger" ng-hide="dataPrazo"> *</strong></label>
+                <input id="dataPrazo" type="date" ng-model="dataPrazo" class="form-control" required/>
+            </div>
+
+            <div class="col-md-12">
+                <label for="tipoOrdem">Solicitação<strong class="text-danger" ng-show="!entity.status">*</strong></label>
+                <select id="tipoOrdem" type="text" ng-model="entity.tipoOrdem" class="form-control" required ng-options="tipoOrdem for tipoOrdem in arrTipoOrdens track by tipoOrdem"/></select>
             </div>
         </div>
 
         </td>
-        <div class="col-md-12" style="margin-top: 20px">
+        <div class="col-md-12">
             <table class="table table-bordered">
                 <thead>
                 <th>Nome</th>
                 <th>Quantidade</th>
+                <th></th>
                 </thead>
                 <tbody>
-                <tr ng-repeat="data in entity.itemProducaoLista track by $index">
-                    <td>{{data.produto.name}}</td>
+                <tr ng-repeat="data in entity.itemProducao track by $index">
+                    <td>{{data.valor}}</td>
                     <td>
                         {{data.quantidade}}
                     </td>
+                    <td>
+                        <button class="btn btn-danger" type="button" ng-click="remover($index)"> <span class="fa fa-remove"></span></button>
                 </tr>
                 </tbody>
             </table>
         </div>
 
+        <div class="col-md-12" style="margin-top: 15px">
+            <button type="button" class="btn btn-primary pull-right" ng-click="save(entity)">
+            Salvar
+            </button>
+        </div>
         <span class="clearfix"></span>
     </form>
 </div>

@@ -48,7 +48,6 @@ angular.module('app.produto', ['ui.router'])
     this.update     = update;
     this.save       = save;
     this.remove     = remove;
-    this.getByName  = getByName;
 
     function get(page) {
       return $http.get('/api/produto', page).then(function(data) {
@@ -64,7 +63,6 @@ angular.module('app.produto', ['ui.router'])
 
     function getId(id) {
       return $http.get('/api/produto/' + id).then(function(data) {
-        console.log(data)
         return data.data;
       });
     }

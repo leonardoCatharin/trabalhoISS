@@ -5,13 +5,14 @@
     <div class="col-md-8 col-md-offset-2">
         <table class="table table-hover">
             <thead>
-                <th>Tipo de Ordem
-            </th>
+                <th>Cliente</th>
+                <th>tipoOrdem</th>
                 <th>Prazo de entrega</th>
                 <th></th>
             </thead>
             <tbody>
-                <tr ng-repeat="data in ordensProducao">
+                <tr ng-repeat="data in pedidoCompras">
+                    <td>{{data.cliente}}</td>
                     <td>{{data.tipoOrdem}}</td>
                     <td>{{data.dataPrazo}}</td>
                     <td>
